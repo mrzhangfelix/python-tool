@@ -15,9 +15,10 @@ def main():
 	try:
 		while True:
 			print("start")
-			pyautogui.keyDown('t')
+			# pyautogui.keyDown('t')
+			pyautogui.press('t')
 			time.sleep(1)
-			pyautogui.keyUp('t')
+			# pyautogui.keyUp('t')
 	except KeyboardInterrupt:
 		print('Exit')
 
