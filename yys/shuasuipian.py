@@ -6,6 +6,7 @@ import pyautogui
 from PIL import ImageGrab, Image
 import sys
 
+#刷碎片用
 def main():
 	a=1
 	while True:
