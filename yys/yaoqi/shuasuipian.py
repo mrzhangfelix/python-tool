@@ -5,7 +5,7 @@ from PIL import ImageGrab, Image
 #刷碎片用
 def main():
 	# 状态 0：初始 1：组队界面 2：匹配中 3：战斗中或战斗结束
-	status=0
+	status=1
 	a=1
 	teamUpImg = Image.open("teamUp.png")
 	matchImg = Image.open("match.png")
@@ -29,11 +29,10 @@ def main():
 			pyautogui.click()
 			time.sleep(1)
 			continue
-		time.sleep(2)
-		print("cur status:{}".format(status))
+		time.sleep(3)
 
 def button(Img):
-	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True)
+	msg = pyautogui.locateOnScreen(Img, confidence=0.9)
 	if msg == None:
 		return False
 	else:

@@ -9,17 +9,18 @@ def main():
 	zeroMedalImg = Image.open("zeroMedal.png")
 	fullMedalImg = Image.open("fullMedal.png")
 	while True:
-		if button(attackImg,"attack"):
-			sleep(2)
-			continue
 		if button(zeroMedalImg,"0Medal"):
+			print("点击zeroMedal按钮")
 			sleep(1)
 			if button(attackImg,"attack"):
+				print("点击attack按钮")
 				sleep(10)
 			continue
 		if button(fullMedalImg,"5Medal"):
+			print("点击5Medal按钮")
 			sleep(1)
 			if button(attackImg,"attack"):
+				print("点击attack按钮")
 				sleep(10)
 			continue
 		pyautogui.moveTo(2360,776)
@@ -33,7 +34,6 @@ def button(Img,imgName):
 		return False
 	else:
 		x, y, width, height = msg
-		print("点击"+imgName+"按钮")
 		# print("X={},Y={}，宽{}像素,高{}像素".format(x, y, width, height))
 		center=pyautogui.center((x,y,width,height))
 		pyautogui.click(center)

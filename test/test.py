@@ -10,7 +10,7 @@ import sys
 def main():
 	a=1
 	while True:
-		if button("img.png"):
+		if button("match.png"):
 			print("次数:"+str(a))
 			a=a+1
 			time.sleep(2)
