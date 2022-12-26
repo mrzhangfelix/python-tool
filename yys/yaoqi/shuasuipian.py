@@ -11,24 +11,28 @@ def main():
 	matchImg = Image.open("match.png")
 	prepareImg = Image.open("prepare.png")
 	while True:
-		if status==3 and button(teamUpImg):
-			print("点击teamUp按钮")
-			status=1
-			time.sleep(1)
+		if status==3:
+			if button(teamUpImg):
+				print("点击teamUp按钮")
+				status=1
+				time.sleep(1)
+			else:
+				pyautogui.click()
+				time.sleep(1)
+				continue
 		if status==1 and button(matchImg):
 			print("点击match按钮")
 			status=2
 			time.sleep(1)
 		if status==2 and button(prepareImg):
+			# 确保战斗开始
+			while button(prepareImg):
+				time.sleep(2)
 			print("点击prepare按钮")
 			status=3
-			print("次数:{}".format(a))
+			print("开始次数:{}".format(a))
 			a=a+1
 			time.sleep(20)
-		if status==3:
-			pyautogui.click()
-			time.sleep(1)
-			continue
 		time.sleep(3)
 
 def button(Img):
