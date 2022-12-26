@@ -1,42 +1,39 @@
-import pyautogui
-import time
-
 from time import sleep
 import pyautogui
 from PIL import ImageGrab, Image
-import sys
 
-#刷碎片用
 def main():
 	a=1
-	while True:
-		if button("组队.png"):
-			time.sleep(2)
-			continue
-		if button("自动匹配.png"):
-			time.sleep(2)
-			continue
-		if button("准备.png"):
-			print("次数:"+str(a))
-			a=a+1
-			time.sleep(20)
-			continue
-		pyautogui.click()
-		time.sleep(1)
-
-
-def button(png):
 	# 事先对按钮截图
-	Img = Image.open(png)
-	time.sleep(1)
-	# 截图当前屏幕并找到之前加载的按钮截图 confidence的值决定精度
+	attackImg = Image.open("attack.png")
+	zeroMedalImg = Image.open("zeroMedal.png")
+	fullMedalImg = Image.open("fullMedal.png")
+	while True:
+		if button(attackImg,"attack"):
+			sleep(2)
+			continue
+		if button(zeroMedalImg,"0Medal"):
+			sleep(1)
+			if button(attackImg,"attack"):
+				sleep(10)
+			continue
+		if button(fullMedalImg,"5Medal"):
+			sleep(1)
+			if button(attackImg,"attack"):
+				sleep(10)
+			continue
+		pyautogui.moveTo(2360,776)
+		pyautogui.click()
+		sleep(1)
+
+
+def button(Img,imgName):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True)
 	if msg == None:
 		return False
 	else:
 		x, y, width, height = msg
-		print()
-		print("点击"+png+"按钮")
+		print("点击"+imgName+"按钮")
 		# print("X={},Y={}，宽{}像素,高{}像素".format(x, y, width, height))
 		center=pyautogui.center((x,y,width,height))
 		pyautogui.click(center)
