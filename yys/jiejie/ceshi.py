@@ -1,5 +1,4 @@
-import sys
-sys.path.append("..")
-import utils
 
-utils.get_window_pos("有道云笔记")
+
+pos=(1,222,333,4444)
+print(pos[-6])
