@@ -25,7 +25,7 @@ def main():
 		# 	continue
 		pyautogui.moveTo(2360,776)
 		pyautogui.click()
-		sleep(2)
+		sleep(3)
 
 
 def button(Img,imgName):
