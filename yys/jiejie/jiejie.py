@@ -6,29 +6,21 @@ def main():
 	a=1
 	# 事先对按钮截图
 	attackImg = Image.open("attack.png")
-	zeroMedalImg = Image.open("medal.png")
-	# fullMedalImg = Image.open("fullMedal.png")
+	noattackImg = Image.open("medal.png")
 	while True:
-		if button(zeroMedalImg,"0Medal"):
+		if button(noattackImg):
 			print("点击zeroMedal按钮")
 			sleep(1)
-			if button(attackImg,"attack"):
+			if button(attackImg):
 				print("点击attack按钮")
 				sleep(10)
 			continue
-		# if button(fullMedalImg,"5Medal"):
-		# 	print("点击5Medal按钮")
-		# 	sleep(1)
-		# 	if button(attackImg,"attack"):
-		# 		print("点击attack按钮")
-		# 		sleep(10)
-		# 	continue
 		pyautogui.moveTo(2360,776)
 		pyautogui.click()
 		sleep(3)
 
 
-def button(Img,imgName):
+def button(Img):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True)
 	if msg == None:
 		return False
