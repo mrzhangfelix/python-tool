@@ -4,22 +4,18 @@ from PIL import ImageGrab, Image
 
 #刷碎片用
 def main():
-	# 状态 0：初始 1：组队界面 2：匹配中 3：战斗中或战斗结束
+	# 状态 0：初始 1：组队界面 2：匹配中 3：战斗中 4：战斗结束
 	status=1
 	a=1
 	teamUpImg = Image.open("teamUp.png")
 	matchImg = Image.open("match.png")
 	prepareImg = Image.open("prepare.png")
+	endImg = Image.open("end.png")
 	while True:
-		if status==3:
-			if button(teamUpImg):
-				print("点击teamUp按钮")
-				status=1
-				time.sleep(1)
-			else:
-				pyautogui.click()
-				time.sleep(1)
-				continue
+		if status==4 and button(teamUpImg):
+			print("点击teamUp按钮")
+			status=1
+			time.sleep(1)
 		if status==1 and button(matchImg):
 			print("点击match按钮")
 			status=2
@@ -33,6 +29,10 @@ def main():
 			print("开始次数:{}".format(a))
 			a=a+1
 			time.sleep(20)
+		if status==3 and button(endImg):
+			status=4
+			time.sleep(1)
+			continue
 		time.sleep(3)
 
 def button(Img):
