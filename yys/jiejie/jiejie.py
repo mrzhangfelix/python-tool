@@ -6,13 +6,15 @@ import win32api,win32con,win32gui
 
 def main():
 	count=1
+	shibaicount=1
 	pos=(0,0,1720,968)
 	# 打开窗口在固定位置
-	get_window_pos("MuMu模拟器",pos)
+	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
 	attackImg = Image.open("attack.png")
 	noattackImg = Image.open("medal.png")
 	endImg = Image.open("end.png")
+	shibaiImg = Image.open("shibai.png")
 	while True:
 		if button(noattackImg,pos):
 			print("点击noattack按钮")
@@ -24,6 +26,11 @@ def main():
 			print("点击end按钮")
 			count=count+1
 			print("count:{}".format(count))
+			sleep(2)
+		if button(shibaiImg,pos):
+			print("点击shibai按钮")
+			shibaicount=shibaicount+1
+			print("shibaicount:{}".format(shibaicount))
 			sleep(2)
 		sleep(3)
 
@@ -43,6 +50,7 @@ def get_window_pos(name,pos):
 	# 获取窗口句柄
 	if handle == 0:
 		print("not found windows")
+		exit()
 	else:
 		# win32gui.SendMessage(handle,win32con.WM_SYSCOMMAND,win32con.SC_RESTORE,0)
 		#发送还原最小化窗口的信息

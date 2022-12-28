@@ -49,7 +49,7 @@ def wenzishibie(x1, y1, x2, y2):
     # 截图
     img_ready.show()
     # 读取图片
-    # im = Image.open('img.png')
+    # im = Image.open('medal.png')
     # 识别文字
     string = pytesseract.image_to_string(img_ready)
     print(string)
