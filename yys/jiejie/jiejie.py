@@ -12,6 +12,7 @@ def main():
 
 	attackImg = Image.open("attack.png")
 	noattackImg = Image.open("medal.png")
+	endImg = Image.open("end.png")
 	while True:
 		if button(noattackImg,pos):
 			print("点击zeroMedal按钮")
@@ -19,10 +20,11 @@ def main():
 			if button(attackImg,pos):
 				print("点击attack按钮")
 				count=count+1
+				print("count:{}".format(count))
 				sleep(10)
-			continue
-		pyautogui.moveTo(2360,776)
-		pyautogui.click()
+		if button(endImg,pos):
+			print("点击end按钮")
+			sleep(2)
 		sleep(3)
 
 def button(Img,pos):
