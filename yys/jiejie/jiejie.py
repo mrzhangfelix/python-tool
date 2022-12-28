@@ -6,9 +6,9 @@ import win32api,win32con,win32gui
 
 def main():
 	count=1
-	pos=(0,0,500,700)
+	pos=(0,0,1720,968)
 	# 打开窗口在固定位置
-	get_window_pos("MuMu",pos)
+	get_window_pos("MuMu模拟器",pos)
 
 	attackImg = Image.open("attack.png")
 	noattackImg = Image.open("medal.png")
