@@ -15,15 +15,15 @@ def main():
 	endImg = Image.open("end.png")
 	while True:
 		if button(noattackImg,pos):
-			print("点击zeroMedal按钮")
+			print("点击noattack按钮")
 			sleep(1)
 			if button(attackImg,pos):
 				print("点击attack按钮")
-				count=count+1
-				print("count:{}".format(count))
 				sleep(10)
 		if button(endImg,pos):
 			print("点击end按钮")
+			count=count+1
+			print("count:{}".format(count))
 			sleep(2)
 		sleep(3)
 
