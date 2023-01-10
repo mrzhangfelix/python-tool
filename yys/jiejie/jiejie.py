@@ -5,8 +5,8 @@ from PIL import ImageGrab, Image
 import win32api,win32con,win32gui
 
 def main():
-	count=1
-	shibaicount=1
+	count=0
+	shibaicount=0
 	pos=(0,0,1720,968)
 	# 打开窗口在固定位置
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
@@ -22,15 +22,27 @@ def main():
 			if button(attackImg,pos):
 				print("点击attack按钮")
 				sleep(10)
+				# if button(attackImg,pos):
+				# 	# 如果进攻按钮还在就说明没有挑战机会了，可以去做点别的事情
+				# 	print("挑战测试用光，退出")
+				# 	pyautogui.moveTo(1500,720)
+				# 	pyautogui.click()
+				# 	sleep(1800)
+				# 	continue
+		# else:
+		# 	print("当前已经挑战完毕，可以刷新")
+		# 	exit()
 		if button(endImg,pos):
+			while button(endImg,pos):
+				sleep(2)
 			print("点击end按钮")
 			count=count+1
-			print("count:{}".format(count))
+			print("chengong count:{}".format(count))
 			sleep(2)
 		if button(shibaiImg,pos):
 			print("点击shibai按钮")
 			shibaicount=shibaicount+1
-			print("shibaicount:{}".format(shibaicount))
+			print("shibai count:{}".format(shibaicount))
 			sleep(2)
 		sleep(3)
 

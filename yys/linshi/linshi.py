@@ -11,18 +11,19 @@ def main():
     # 打开窗口在固定位置
     get_window_pos("阴阳师 - MuMu模拟器",pos)
 
+    attackImg = Image.open("业原火挑战.png")
     # attackImg = Image.open("挑战.png")
-    attackImg = Image.open("img.png")
+    # attackImg = Image.open("img.png")
     prepareImg = Image.open("prepare.png")
     endImg = Image.open("end.png")
     while True:
-        if button(attackImg,pos):
-            print("点击attack按钮count:{}".format(count))
-            count=count+1
+        # if button(attackImg,pos):
+        #     print("点击attack按钮count:{}".format(count))
+        #     count=count+1
+        #     sleep(10)
+        if button(prepareImg,pos):
+            print("点击准备按钮")
             sleep(180)
-        # if button(prepareImg,pos):
-        #     print("点击准备按钮")
-        #     sleep(180)
         # if button(endImg,pos):
         #     print("点击end按钮")
         #     count=count+1
