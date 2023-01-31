@@ -13,7 +13,7 @@ def main():
 
     attackImg = Image.open("业原火挑战.png")
     # attackImg = Image.open("挑战.png")
-    # attackImg = Image.open("img.png")
+    # attackImg = Image.open("explore.png")
     prepareImg = Image.open("prepare.png")
     endImg = Image.open("end.png")
     while True:
@@ -21,9 +21,9 @@ def main():
         #     print("点击attack按钮count:{}".format(count))
         #     count=count+1
         #     sleep(10)
-        if button(prepareImg,pos):
-            print("点击准备按钮")
-            sleep(180)
+        # if button(prepareImg,pos):
+        #     print("点击准备按钮")
+        #     sleep(3)
         # if button(endImg,pos):
         #     print("点击end按钮")
         #     count=count+1
@@ -32,6 +32,9 @@ def main():
         pyautogui.moveTo(1500,720)
         pyautogui.click()
         sleep(3)
+        # pyautogui.moveTo(270,300)
+        # pyautogui.click()
+        # sleep(3)
 
 def button(Img,pos):
     msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)

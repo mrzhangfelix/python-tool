@@ -4,6 +4,8 @@ import pyautogui
 from PIL import ImageGrab, Image
 import win32api,win32con,win32gui
 
+# pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
+
 def main():
 	count=0
 	shibaicount=0
@@ -21,7 +23,7 @@ def main():
 			sleep(1)
 			if button(attackImg,pos):
 				print("点击attack按钮")
-				sleep(10)
+				sleep(5)
 				# if button(attackImg,pos):
 				# 	# 如果进攻按钮还在就说明没有挑战机会了，可以去做点别的事情
 				# 	print("挑战测试用光，退出")
@@ -34,17 +36,19 @@ def main():
 		# 	exit()
 		if button(endImg,pos):
 			while button(endImg,pos):
-				sleep(2)
+				sleep(1)
 			print("点击end按钮")
 			count=count+1
 			print("chengong count:{}".format(count))
-			sleep(2)
+			sleep(1)
 		if button(shibaiImg,pos):
+			while button(shibaiImg,pos):
+				sleep(1)
 			print("点击shibai按钮")
 			shibaicount=shibaicount+1
 			print("shibai count:{}".format(shibaicount))
-			sleep(2)
-		sleep(3)
+			sleep(1)
+		sleep(2)
 
 def button(Img,pos):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)

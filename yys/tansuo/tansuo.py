@@ -5,16 +5,21 @@ from time import sleep
 import pyautogui
 from PIL import ImageGrab, Image
 import sys
+import win32api,win32con,win32gui
 
 def main():
 	a=1
 	b=1
 	# 事先对按钮截图
+	pos=(0,0,1720,968)
+	# 打开窗口在固定位置
+	get_window_pos("阴阳师 - MuMu模拟器",pos)
+
 	attackImg = Image.open("attack.png")
 	attackLeaderImg = Image.open("attackLeader.png")
 	pickUpImg = Image.open("pickUp.png")
 	exploreImg = Image.open("explore.png")
-	while True:
+	while b<500:
 		if button(attackImg,"attack"):
 			print("attack次数:"+str(b))
 			b=b+1
@@ -26,14 +31,14 @@ def main():
 			time.sleep(5)
 			continue
 		if button(pickUpImg,"pickUp"):
-			pyautogui.moveTo(2196,809)
+			pyautogui.moveTo(1500,720)
 			pyautogui.click()
 			continue
 		if button(exploreImg,"explore.png"):
 			time.sleep(2)
 			continue
 		# X: 2196 , Y:  809
-		pyautogui.moveTo(2360,776)
+		pyautogui.moveTo(1500,720)
 		pyautogui.click()
 		time.sleep(1)
 
@@ -49,6 +54,29 @@ def button(Img,imgName):
 		center=pyautogui.center((x,y,width,height))
 		pyautogui.click(center)
 		return True
+
+def get_window_pos(name,pos):
+	handle = win32gui.FindWindow(0, name)
+	# 获取窗口句柄
+	if handle == 0:
+		print("not found windows")
+		exit()
+	else:
+		# win32gui.SendMessage(handle,win32con.WM_SYSCOMMAND,win32con.SC_RESTORE,0)
+		#发送还原最小化窗口的信息
+		win32gui.ShowWindow(handle, win32con.SW_SHOWMINIMIZED)
+		win32gui.ShowWindow(handle, win32con.SW_SHOWNORMAL)
+		win32gui.ShowWindow(handle, win32con.SW_SHOW)
+		win32gui.SetWindowPos(handle, win32con.HWND_TOP, pos[0], pos[1], pos[2], pos[3], win32con.SWP_SHOWWINDOW)
+		win32gui.SetForegroundWindow(handle)  # 获取控制
+		time.sleep(1)
+		# 窗口的标题
+		tit = win32gui.GetWindowText(handle)
+		# 窗口的坐标
+		(x1, y1, x2, y2)=win32gui.GetWindowRect(handle)
+		print('已启动【'+str(tit)+'】窗口')
+		print('-----------------')
+
 
 if __name__ == '__main__':
 	main()
