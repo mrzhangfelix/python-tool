@@ -48,7 +48,7 @@ def main():
 			shibaicount=shibaicount+1
 			print("shibai count:{}".format(shibaicount))
 			sleep(1)
-		sleep(2)
+		sleep(1)
 
 def button(Img,pos):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)
