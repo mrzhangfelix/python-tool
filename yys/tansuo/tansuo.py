@@ -87,6 +87,7 @@ def doJiejie():
 				sleep(60)
 			continue
 		if button(noattackImg):
+			logger.info("选择挑战")
 			sleep(1)
 			if button(attackImg):
 				sleep(2)
@@ -95,7 +96,7 @@ def doJiejie():
 					while button(guanbiImg):
 						sleep(1)
 					return
-				sleep(5)
+				sleep(10)
 		if button(endImg):
 			while button(endImg):
 				sleep(1)
@@ -108,6 +109,7 @@ def doJiejie():
 			shibaicount = shibaicount + 1
 			logger.info("失败突破次数:{}".format(shibaicount))
 			sleep(1)
+		logger.info("没有空勋章，没有未挑战，没有挑战结束，没有挑战失败，继续循环")
 		sleep(1)
 	button(guanbiImg)
 
