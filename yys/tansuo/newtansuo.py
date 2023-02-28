@@ -1,46 +1,49 @@
+import pyautogui
 import time
+
 from time import sleep
 import pyautogui
 from PIL import ImageGrab, Image
+import sys
 import win32api,win32con,win32gui
 
-# pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
+pos=(0,0,1720,968)
 
 def main():
-	count=0
-	shibaicount=0
-	pos=(0,0,1720,968)
+	a=1
+	b=1
+	# 事先对按钮截图
 	# 打开窗口在固定位置
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
-	attackImg = Image.open("attack.png")
-	noattackImg = Image.open("medal.png")
-	endImg = Image.open("end.png")
-	shibaiImg = Image.open("shibai.png")
-	while count<99:
-		if button(noattackImg,pos):
-			print("点击noattack按钮")
-			sleep(1)
-			if button(attackImg,pos):
-				print("点击attack按钮")
-				sleep(5)
-		if button(endImg,pos):
-			while button(endImg,pos):
-				sleep(1)
-			print("点击end按钮")
-			count=count+1
-			print("chengong count:{}".format(count))
-			sleep(1)
-		if button(shibaiImg,pos):
-			while button(shibaiImg,pos):
-				sleep(1)
-			print("点击shibai按钮")
-			shibaicount=shibaicount+1
-			print("shibai count:{}".format(shibaicount))
-			sleep(1)
-		sleep(1)
+	attackImg = Image.open("tansuoImg/attack.png")
+	attackLeaderImg = Image.open("tansuoImg/attackLeader.png")
+	pickUpImg = Image.open("tansuoImg/pickUp.png")
+	exploreImg = Image.open("tansuoImg/explore.png")
+	while b<500:
+		if button(attackLeaderImg):
+			print("attackLeader次数:"+str(a))
+			a=a+1
+			time.sleep(5)
+			continue
+		if button(attackImg):
+			print("attack次数:"+str(b))
+			b=b+1
+			time.sleep(5)
+			continue
+		if button(pickUpImg):
+			pyautogui.moveTo(1500,720)
+			pyautogui.click()
+			continue
+		if button(exploreImg):
+			time.sleep(2)
+			continue
+		# X: 2196 , Y:  809
+		pyautogui.moveTo(1500,720)
+		pyautogui.click()
+		time.sleep(1)
 
-def button(Img,pos):
+def button(Img):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)
 	if msg == None:
 		return False

@@ -15,29 +15,24 @@ def main():
 
 	attackImg = Image.open("attack.png")
 	noattackImg = Image.open("medal.png")
-	endImg = Image.open("end.png")
 	shibaiImg = Image.open("shibai.png")
-	while count<99:
+	tuichuImg = Image.open("退出.png")
+	querenImg = Image.open("确认.png")
+	while shibaicount<9:
 		if button(noattackImg,pos):
-			print("点击noattack按钮")
 			sleep(1)
 			if button(attackImg,pos):
-				print("点击attack按钮")
-				sleep(5)
-		if button(endImg,pos):
-			while button(endImg,pos):
-				sleep(1)
-			print("点击end按钮")
-			count=count+1
-			print("chengong count:{}".format(count))
-			sleep(1)
+				sleep(2)
+		# 点击退出
+		if button(tuichuImg,pos):
+			sleep(2)
+		# 点击确认
+		if button(querenImg,pos):
+			sleep(4)
 		if button(shibaiImg,pos):
-			while button(shibaiImg,pos):
-				sleep(1)
-			print("点击shibai按钮")
+			sleep(1)
 			shibaicount=shibaicount+1
 			print("shibai count:{}".format(shibaicount))
-			sleep(1)
 		sleep(1)
 
 def button(Img,pos):
