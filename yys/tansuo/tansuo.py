@@ -74,18 +74,21 @@ def doJiejie():
 				if button(shibaiImg):
 					sleep(1)
 					shibaicount=shibaicount+1
-				logger.info("主动退出次数:{}".format(shibaicount))
+					logger.info("主动退出次数:{}".format(shibaicount))
 				sleep(1)
 			shibaicount=0
-			while button(shuaxinImg):
+			if button(shuaxinImg):
 				logger.info("刷新")
 				sleep(1)
 				if button(quedingImg):
 					logger.info("刷新成功")
-					break
+					sleep(5)
+			else:
 				logger.info("刷新冷却中")
-				sleep(60)
-			continue
+				while not button(shuaxinImg):
+					logger.info("没有找到刷新按钮")
+					sleep(30)
+
 		if button(noattackImg):
 			logger.info("选择挑战")
 			sleep(1)
@@ -97,19 +100,22 @@ def doJiejie():
 						sleep(1)
 					return
 				sleep(10)
-		if button(endImg):
-			while button(endImg):
-				sleep(1)
-			count = count + 1
-			logger.info("成功突破:{}".format(count))
-			sleep(1)
-		if button(shibaiImg):
-			while button(shibaiImg):
-				sleep(1)
-			shibaicount = shibaicount + 1
-			logger.info("失败突破次数:{}".format(shibaicount))
-			sleep(1)
-		logger.info("没有空勋章，没有未挑战，没有挑战结束，没有挑战失败，继续循环")
+				while True:
+					if button(endImg):
+						while button(endImg):
+							sleep(1)
+						count = count + 1
+						logger.info("成功突破:{}".format(count))
+						sleep(1)
+						break
+					if button(shibaiImg):
+						while button(shibaiImg):
+							sleep(1)
+						shibaicount = shibaicount + 1
+						logger.info("失败突破次数:{}".format(shibaicount))
+						sleep(1)
+						break
+					sleep(3)
 		sleep(1)
 	button(guanbiImg)
 
