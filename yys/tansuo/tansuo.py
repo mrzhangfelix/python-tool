@@ -1,12 +1,12 @@
-import pyautogui
 import time
 
 from time import sleep
 import pyautogui
 from PIL import ImageGrab, Image
-import sys
 import win32api,win32con,win32gui
 import logging
+from threading import Thread
+
 
 LOG_FILE = 'mylog.log'
 file_handler = logging.FileHandler(LOG_FILE) #输出到文件
@@ -24,13 +24,19 @@ logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
 
+def jieshouyaoqing():
+	if button(jieshouImg):
+		logger.info("接受悬赏邀请")
+		sleep(5)
 
 pos=(0,0,1720,968)
 
 def main():
-
+	thread1=Thread(name='jieshouyaoqing', target=jieshouyaoqing)
+	thread1.start()
 	# 打开窗口在固定位置
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
+
 	while True:
 		doJiejie()
 		doTansou(100)
@@ -54,15 +60,9 @@ def doJiejie():
 	count=0
 	shibaicount=0
 	while True:
-		if button(jieshouImg):
-			logger.info("接受悬赏邀请")
-			sleep(1)
 		if find(kongImg):
 			logger.info("存在空勋章")
 			while shibaicount<9:
-				if button(jieshouImg):
-					logger.info("接受悬赏邀请")
-					sleep(1)
 				if button(noattackImg):
 					sleep(1)
 					if button(attackImg):
@@ -138,9 +138,6 @@ def doTansou(n):
 	exploreImg = Image.open("tansuoImg/explore.png")
 	jieshuImg = Image.open("tansuoImg/结束探索.png")
 	while True:
-		if button(jieshouImg):
-			logger.info("接受悬赏邀请")
-			sleep(1)
 		if button(attackLeaderImg):
 			logger.info("attackLeader次数:" + str(a))
 			a = a + 1
