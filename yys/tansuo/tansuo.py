@@ -22,6 +22,8 @@ logger = logging.getLogger('updateSecurity')
 logger.setLevel('INFO')     #设置了这个才会把debug以上的输出到控制台
 logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
+jieshouImg = Image.open("接受.png")
+
 
 pos=(0,0,1720,968)
 
@@ -31,7 +33,7 @@ def main():
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 	while True:
 		doJiejie()
-		doTansou(50)
+		doTansou(100)
 
 
 def doJiejie():
@@ -52,9 +54,15 @@ def doJiejie():
 	count=0
 	shibaicount=0
 	while True:
+		if button(jieshouImg):
+			logger.info("接受悬赏邀请")
+			sleep(1)
 		if find(kongImg):
 			logger.info("存在空勋章")
 			while shibaicount<9:
+				if button(jieshouImg):
+					logger.info("接受悬赏邀请")
+					sleep(1)
 				if button(noattackImg):
 					sleep(1)
 					if button(attackImg):
@@ -90,7 +98,7 @@ def doJiejie():
 					sleep(30)
 
 		if button(noattackImg):
-			logger.info("选择挑战")
+			# logger.info("选择挑战")
 			sleep(1)
 			if button(attackImg):
 				sleep(2)
@@ -116,7 +124,7 @@ def doJiejie():
 						sleep(1)
 						break
 					sleep(3)
-		sleep(1)
+		sleep(3)
 	button(guanbiImg)
 
 
@@ -130,6 +138,9 @@ def doTansou(n):
 	exploreImg = Image.open("tansuoImg/explore.png")
 	jieshuImg = Image.open("tansuoImg/结束探索.png")
 	while True:
+		if button(jieshouImg):
+			logger.info("接受悬赏邀请")
+			sleep(1)
 		if button(attackLeaderImg):
 			logger.info("attackLeader次数:" + str(a))
 			a = a + 1
