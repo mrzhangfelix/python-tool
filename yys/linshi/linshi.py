@@ -31,7 +31,7 @@ def main():
         #     sleep(2)
         pyautogui.moveTo(1500,720)
         pyautogui.click()
-        sleep(3)
+        sleep(1)
         # pyautogui.moveTo(270,300)
         # pyautogui.click()
         # sleep(3)

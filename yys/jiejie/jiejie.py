@@ -17,7 +17,8 @@ def main():
 	noattackImg = Image.open("medal.png")
 	endImg = Image.open("end.png")
 	shibaiImg = Image.open("shibai.png")
-	while count<99:
+	sleep(2*60)
+	while count<666:
 		if button(noattackImg,pos):
 			print("点击noattack按钮")
 			sleep(1)
