@@ -25,8 +25,9 @@ logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
 
 def jieshouyaoqing():
-	if button(jieshouImg):
-		logger.info("接受悬赏邀请")
+	while True:
+		if button(jieshouImg):
+			logger.info("接受悬赏邀请")
 		sleep(5)
 
 pos=(0,0,1720,968)
@@ -62,6 +63,7 @@ def doJiejie():
 	while True:
 		if find(kongImg):
 			logger.info("存在空勋章")
+			loopcount=0
 			while shibaicount<9:
 				if button(noattackImg):
 					sleep(1)
@@ -83,7 +85,11 @@ def doJiejie():
 					sleep(1)
 					shibaicount=shibaicount+1
 					logger.info("主动退出次数:{}".format(shibaicount))
-				sleep(1)
+				sleep(5)
+				loopcount=loopcount+1
+				if(loopcount>60):
+					logger.info("循环次数过多，异常情况，刷新")
+					break
 			shibaicount=0
 			if button(shuaxinImg):
 				logger.info("刷新")
@@ -96,6 +102,10 @@ def doJiejie():
 				while not button(shuaxinImg):
 					logger.info("没有找到刷新按钮")
 					sleep(30)
+				if button(quedingImg):
+					logger.info("刷新成功")
+					sleep(2)
+					continue
 
 		if button(noattackImg):
 			# logger.info("选择挑战")
