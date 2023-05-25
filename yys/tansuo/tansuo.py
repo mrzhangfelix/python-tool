@@ -60,6 +60,7 @@ def doJiejie():
 	sleep(1)
 	count=0
 	shibaicount=0
+	tiaozhancount=1
 	while True:
 		if find(kongImg):
 			logger.info("存在空勋章")
@@ -91,51 +92,70 @@ def doJiejie():
 					logger.info("循环次数过多，异常情况，刷新")
 					break
 			shibaicount=0
-			if button(shuaxinImg):
-				logger.info("刷新")
-				sleep(1)
-				if button(quedingImg):
-					logger.info("刷新成功")
-					sleep(5)
-			else:
-				logger.info("刷新冷却中")
-				while not button(shuaxinImg):
-					logger.info("没有找到刷新按钮")
-					sleep(30)
-				if button(quedingImg):
-					logger.info("刷新成功")
-					sleep(2)
-					continue
+			buttonshuaxin(quedingImg, shuaxinImg)
+			continue
 
 		if button(noattackImg):
-			# logger.info("选择挑战")
+			logger.info("第{}次选择挑战".format(tiaozhancount))
 			sleep(1)
 			if button(attackImg):
+				logger.info("开始第{}次进攻".format(tiaozhancount))
 				sleep(2)
 				if find(attackImg):
 					logger.info("挑战券数量为0")
 					while button(guanbiImg):
+						logger.info("第{}次，挑战结束关闭".format(tiaozhancount))
 						sleep(1)
 					return
 				sleep(10)
 				while True:
 					if button(endImg):
+						logger.info("第{}次，挑战成功".format(tiaozhancount))
+						sleep(1)
 						while button(endImg):
+							logger.info("第{}次，挑战成功".format(tiaozhancount))
 							sleep(1)
 						count = count + 1
+						tiaozhancount =tiaozhancount +1
 						logger.info("成功突破:{}".format(count))
 						sleep(1)
 						break
 					if button(shibaiImg):
+						logger.info("第{}次，挑战失败".format(tiaozhancount))
+						sleep(1)
 						while button(shibaiImg):
+							logger.info("第{}次，挑战失败".format(tiaozhancount))
 							sleep(1)
 						shibaicount = shibaicount + 1
+						tiaozhancount =tiaozhancount +1
 						logger.info("失败突破次数:{}".format(shibaicount))
 						sleep(1)
 						break
+					logger.info("第{}次，正在挑战中".format(tiaozhancount))
 					sleep(3)
+		logger.info("第{}次挑战结界中".format(tiaozhancount))
 		sleep(3)
+		if not find(noattackImg) and find(shuaxinImg):
+			logger.info("没有可以挑战的结界，存在挑战失败")
+			buttonshuaxin(quedingImg, shuaxinImg)
 	button(guanbiImg)
+
+
+def buttonshuaxin(quedingImg, shuaxinImg):
+	if button(shuaxinImg):
+		logger.info("刷新")
+		sleep(1)
+		if button(quedingImg):
+			logger.info("刷新成功")
+			sleep(5)
+	else:
+		logger.info("刷新冷却中")
+		while not button(shuaxinImg):
+			logger.info("没有找到刷新按钮")
+			sleep(30)
+		if button(quedingImg):
+			logger.info("刷新成功")
+			sleep(2)
 
 
 def doTansou(n):
