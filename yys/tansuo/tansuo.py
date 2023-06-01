@@ -27,7 +27,7 @@ jieshouImg = Image.open("接受.png")
 def jieshouyaoqing():
 	while True:
 		if button(jieshouImg):
-			logger.info("接受悬赏邀请")
+			logger.error("接受悬赏邀请")
 		sleep(5)
 
 pos=(0,0,1720,968)
@@ -40,7 +40,7 @@ def main():
 
 	while True:
 		doJiejie()
-		doTansou(100)
+		doTansou(50)
 
 
 def doJiejie():
@@ -88,8 +88,8 @@ def doJiejie():
 					logger.info("主动退出次数:{}".format(shibaicount))
 				sleep(5)
 				loopcount=loopcount+1
-				if(loopcount>60):
-					logger.info("循环次数过多，异常情况，刷新")
+				if(loopcount>30):
+					logger.error("循环次数过多，异常情况，刷新")
 					break
 			shibaicount=0
 			buttonshuaxin(quedingImg, shuaxinImg)
@@ -132,11 +132,11 @@ def doJiejie():
 						sleep(1)
 						break
 					logger.info("第{}次，正在挑战中".format(tiaozhancount))
-					sleep(3)
+					sleep(5)
 		logger.info("第{}次挑战结界中".format(tiaozhancount))
 		sleep(3)
 		if not find(noattackImg) and find(shuaxinImg):
-			logger.info("没有可以挑战的结界，存在挑战失败")
+			logger.error("没有可以挑战的结界，存在挑战失败")
 			buttonshuaxin(quedingImg, shuaxinImg)
 	button(guanbiImg)
 
