@@ -24,8 +24,8 @@ logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
 
-global tiaozhanTotalCount
-global tansuoTotalCount
+tiaozhanTotalCount=0
+tansuoTotalCount=0
 
 def jieshouyaoqing():
 	while True:
@@ -37,8 +37,6 @@ def jieshouyaoqing():
 pos=(0,0,1720,968)
 
 def main():
-	tiaozhanTotalCount=0
-	tansuoTotalCount=0
 	thread1=Thread(name='jieshouyaoqing', target=jieshouyaoqing)
 	thread1.start()
 	# 打开窗口在固定位置
@@ -124,6 +122,7 @@ def doJiejie():
 							sleep(1)
 						chenggongCount = chenggongCount + 1
 						tiaozhancount =tiaozhancount +1
+						global tiaozhanTotalCount
 						tiaozhanTotalCount=tiaozhanTotalCount+1
 						logger.info("成功突破:{}".format(chenggongCount))
 						sleep(1)
@@ -158,6 +157,7 @@ def doTansou(n):
 	exploreImg = Image.open("tansuoImg/explore.png")
 	jieshuImg = Image.open("tansuoImg/结束探索.png")
 	while True:
+		global tansuoTotalCount
 		if button(attackLeaderImg):
 			logger.info("attackLeader次数:" + str(leaderCount))
 			leaderCount = leaderCount + 1
