@@ -24,10 +24,14 @@ logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
 
+tiaozhanTotalCount=0
+tansuoTotalCount=0
+
 def jieshouyaoqing():
 	while True:
 		if button(jieshouImg):
 			logger.error("接受悬赏邀请")
+		logger.info("挑战结界总共{}次，探索总共{}次".format(tiaozhanTotalCount,tansuoTotalCount))
 		sleep(5)
 
 pos=(0,0,1720,968)
@@ -51,49 +55,50 @@ def doJiejie():
 	shibaiImg = Image.open("jiejieImg/shibai.png")
 	kaishiImg = Image.open("jiejieImg/打开结界突破.png")
 	guanbiImg = Image.open("jiejieImg/关闭结界突破.png")
-	tuichuImg = Image.open("jiejieImg/退出.png")
-	querenImg = Image.open("jiejieImg/确认.png")
 	shuaxinImg = Image.open("jiejieImg/刷新.png")
 	quedingImg = Image.open("jiejieImg/确定退出.png")
-	kongImg = Image.open("jiejieImg/空勋章.png")
+	# tuichuImg = Image.open("jiejieImg/退出.png")
+	# querenImg = Image.open("jiejieImg/确认.png")
+	# kongImg = Image.open("jiejieImg/空勋章.png")
 	button(kaishiImg)
 	sleep(1)
-	count=0
+	chenggongCount=0
 	shibaicount=0
 	tiaozhancount=1
 	while True:
-		if find(kongImg):
-			logger.info("存在空勋章")
-			loopcount=0
-			while shibaicount<9:
-				if button(noattackImg):
-					sleep(1)
-					if button(attackImg):
-						sleep(2)
-						if find(attackImg):
-							logger.info("挑战券数量为0")
-							while button(guanbiImg):
-								sleep(1)
-							return
-						sleep(2)
-				# 点击退出
-				if button(tuichuImg):
-					sleep(2)
-				# 点击确认
-				if button(querenImg):
-					sleep(4)
-				if button(shibaiImg):
-					sleep(1)
-					shibaicount=shibaicount+1
-					logger.info("主动退出次数:{}".format(shibaicount))
-				sleep(5)
-				loopcount=loopcount+1
-				if(loopcount>30):
-					logger.error("循环次数过多，异常情况，刷新")
-					break
-			shibaicount=0
-			buttonshuaxin(quedingImg, shuaxinImg)
-			continue
+		# 空勋章的刷新逻辑
+		# if find(kongImg):
+		# 	logger.info("存在空勋章")
+		# 	loopcount=0
+		# 	while shibaicount<9:
+		# 		if button(noattackImg):
+		# 			sleep(1)
+		# 			if button(attackImg):
+		# 				sleep(2)
+		# 				if find(attackImg):
+		# 					logger.info("挑战券数量为0")
+		# 					while button(guanbiImg):
+		# 						sleep(1)
+		# 					return
+		# 				sleep(2)
+		# 		# 点击退出
+		# 		if button(tuichuImg):
+		# 			sleep(2)
+		# 		# 点击确认
+		# 		if button(querenImg):
+		# 			sleep(4)
+		# 		if button(shibaiImg):
+		# 			sleep(1)
+		# 			shibaicount=shibaicount+1
+		# 			logger.info("主动退出次数:{}".format(shibaicount))
+		# 		sleep(5)
+		# 		loopcount=loopcount+1
+		# 		if(loopcount>30):
+		# 			logger.error("循环次数过多，异常情况，刷新")
+		# 			break
+		# 	shibaicount=0
+		# 	buttonshuaxin(quedingImg, shuaxinImg)
+		# 	continue
 
 		if button(noattackImg):
 			logger.info("第{}次选择挑战".format(tiaozhancount))
@@ -115,9 +120,10 @@ def doJiejie():
 						while button(endImg):
 							logger.info("第{}次，挑战成功".format(tiaozhancount))
 							sleep(1)
-						count = count + 1
+						chenggongCount = chenggongCount + 1
 						tiaozhancount =tiaozhancount +1
-						logger.info("成功突破:{}".format(count))
+						tiaozhanTotalCount=tansuoTotalCount+1
+						logger.info("成功突破:{}".format(chenggongCount))
 						sleep(1)
 						break
 					if button(shibaiImg):
@@ -131,15 +137,52 @@ def doJiejie():
 						logger.info("失败突破次数:{}".format(shibaicount))
 						sleep(1)
 						break
-					logger.info("第{}次，正在挑战中".format(tiaozhancount))
+					# logger.info("第{}次，正在挑战中".format(tiaozhancount))
 					sleep(5)
-		logger.info("第{}次挑战结界中".format(tiaozhancount))
+		# logger.info("第{}次挑战结界中".format(tiaozhancount))
 		sleep(3)
 		if not find(noattackImg) and find(shuaxinImg):
 			logger.error("没有可以挑战的结界，存在挑战失败")
 			buttonshuaxin(quedingImg, shuaxinImg)
 	button(guanbiImg)
 
+def doTansou(n):
+	logger.info("开始探索")
+	leaderCount=1
+	attackCount=1
+	attackImg = Image.open("tansuoImg/attack.png")
+	attackLeaderImg = Image.open("tansuoImg/attackLeader.png")
+	pickUpImg = Image.open("tansuoImg/pickUp.png")
+	exploreImg = Image.open("tansuoImg/explore.png")
+	jieshuImg = Image.open("tansuoImg/结束探索.png")
+	while True:
+		if button(attackLeaderImg):
+			logger.info("attackLeader次数:" + str(leaderCount))
+			leaderCount = leaderCount + 1
+			tansuoTotalCount=tansuoTotalCount+1
+			time.sleep(5)
+			continue
+		if button(attackImg):
+			logger.info("attack次数:" + str(attackCount))
+			attackCount = attackCount + 1
+			tansuoTotalCount=tansuoTotalCount+1
+			time.sleep(5)
+			continue
+		if button(pickUpImg):
+			pyautogui.moveTo(1500, 720)
+			pyautogui.click()
+			continue
+		if find(exploreImg) and attackCount > n:
+			button(jieshuImg)
+			time.sleep(2)
+			break
+		if button(exploreImg):
+			time.sleep(2)
+			continue
+		# X: 2196 , Y:  809
+		pyautogui.moveTo(1500, 720)
+		pyautogui.click()
+		time.sleep(2)
 
 def buttonshuaxin(quedingImg, shuaxinImg):
 	if button(shuaxinImg):
@@ -156,45 +199,6 @@ def buttonshuaxin(quedingImg, shuaxinImg):
 		if button(quedingImg):
 			logger.info("刷新成功")
 			sleep(2)
-
-
-def doTansou(n):
-	logger.info("开始探索")
-	a=1
-	b=1
-	attackImg = Image.open("tansuoImg/attack.png")
-	attackLeaderImg = Image.open("tansuoImg/attackLeader.png")
-	pickUpImg = Image.open("tansuoImg/pickUp.png")
-	exploreImg = Image.open("tansuoImg/explore.png")
-	jieshuImg = Image.open("tansuoImg/结束探索.png")
-	while True:
-		if button(attackLeaderImg):
-			logger.info("attackLeader次数:" + str(a))
-			a = a + 1
-			time.sleep(5)
-			continue
-		if button(attackImg):
-			logger.info("attack次数:" + str(b))
-			b = b + 1
-			time.sleep(5)
-			continue
-		if button(pickUpImg):
-			pyautogui.moveTo(1500, 720)
-			pyautogui.click()
-			continue
-		if find(exploreImg) and b > n:
-			button(jieshuImg)
-			time.sleep(2)
-			break
-		if button(exploreImg):
-			time.sleep(2)
-			continue
-
-		# X: 2196 , Y:  809
-		pyautogui.moveTo(1500, 720)
-		pyautogui.click()
-		time.sleep(1)
-
 
 def button(Img):
 	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)
