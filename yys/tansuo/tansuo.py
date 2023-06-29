@@ -28,10 +28,16 @@ tiaozhanTotalCount=0
 tansuoTotalCount=0
 
 def jieshouyaoqing():
+	tiaozhanTotalCountTemp=0
+	tansuoTotalCountTemp=0
 	while True:
 		if button(jieshouImg):
 			logger.error("接受悬赏邀请")
-		logger.info("挑战结界总共{}次，探索总共{}次".format(tiaozhanTotalCount,tansuoTotalCount))
+		if tiaozhanTotalCountTemp!=tansuoTotalCount or tansuoTotalCountTemp!=tansuoTotalCount:
+			tiaozhanTotalCountTemp=tiaozhanTotalCount
+			tansuoTotalCountTemp=tansuoTotalCount
+			logger.info("挑战结界总共 {} 次，探索总共 {} 次"
+						.format(tiaozhanTotalCountTemp,tansuoTotalCountTemp))
 		sleep(5)
 
 pos=(0,0,1720,968)
