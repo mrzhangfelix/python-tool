@@ -24,8 +24,8 @@ logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
 
-tiaozhanTotalCount=0
-tansuoTotalCount=0
+global tiaozhanTotalCount
+global tansuoTotalCount
 
 def jieshouyaoqing():
 	while True:
@@ -37,6 +37,8 @@ def jieshouyaoqing():
 pos=(0,0,1720,968)
 
 def main():
+	tiaozhanTotalCount=0
+	tansuoTotalCount=0
 	thread1=Thread(name='jieshouyaoqing', target=jieshouyaoqing)
 	thread1.start()
 	# 打开窗口在固定位置
@@ -122,7 +124,7 @@ def doJiejie():
 							sleep(1)
 						chenggongCount = chenggongCount + 1
 						tiaozhancount =tiaozhancount +1
-						tiaozhanTotalCount=tansuoTotalCount+1
+						tiaozhanTotalCount=tiaozhanTotalCount+1
 						logger.info("成功突破:{}".format(chenggongCount))
 						sleep(1)
 						break
