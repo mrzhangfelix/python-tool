@@ -38,7 +38,7 @@ def jieshouyaoqing():
 			tiaozhanTotalCountTemp=tiaozhanTotalCount
 			tansuoTotalCountTemp=tansuoTotalCount
 			end=time.time()
-			logger.info("开始时间 {} 分钟；挑战结界总共 {} 次，探索总共 {} 次"
+			logger.info("{} 分钟；结界 {} ，探索 {} "
 						.format(round((end-start)/60,1),tiaozhanTotalCountTemp,tansuoTotalCountTemp))
 		sleep(5)
 
@@ -109,24 +109,24 @@ def doJiejie():
 		# 	continue
 
 		if button(noattackImg):
-			logger.info("第{}次选择挑战".format(tiaozhancount))
+			# logger.info("第{}次选择挑战".format(tiaozhancount))
 			sleep(1)
 			if button(attackImg):
-				logger.info("开始第{}次进攻".format(tiaozhancount))
+				# logger.info("开始第{}次进攻".format(tiaozhancount))
 				sleep(2)
 				if find(attackImg):
-					logger.info("挑战券数量为0")
+					# logger.info("挑战券数量为0")
 					while button(guanbiImg):
-						logger.info("第{}次，挑战结束关闭".format(tiaozhancount))
+						# logger.info("第{}次，挑战结束关闭".format(tiaozhancount))
 						sleep(1)
 					return
 				sleep(10)
 				while True:
 					if button(endImg):
-						logger.info("第{}次，挑战成功".format(tiaozhancount))
+						# logger.info("第{}次，挑战成功".format(tiaozhancount))
 						sleep(1)
 						while button(endImg):
-							logger.info("第{}次，挑战成功".format(tiaozhancount))
+							# logger.info("第{}次，挑战成功".format(tiaozhancount))
 							sleep(1)
 						chenggongCount = chenggongCount + 1
 						tiaozhancount =tiaozhancount +1
@@ -173,7 +173,7 @@ def doTansou(n):
 			time.sleep(5)
 			continue
 		if button(attackImg):
-			logger.info("attack次数:" + str(attackCount))
+			# logger.info("attack次数:" + str(attackCount))
 			attackCount = attackCount + 1
 			tansuoTotalCount=tansuoTotalCount+1
 			time.sleep(5)
