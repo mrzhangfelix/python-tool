@@ -23,9 +23,12 @@ logger.setLevel('INFO')     #设置了这个才会把debug以上的输出到控�
 logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
 jieshouImg = Image.open("接受.png")
+huijuanzhongImg = Image.open("绘卷中.png")
 
 tiaozhanTotalCount=0
 tansuoTotalCount=0
+tansuoLeaderCount=0
+huijuanzhongCount=0
 
 def jieshouyaoqing():
 	tiaozhanTotalCountTemp=0
@@ -38,8 +41,12 @@ def jieshouyaoqing():
 			tiaozhanTotalCountTemp=tiaozhanTotalCount
 			tansuoTotalCountTemp=tansuoTotalCount
 			end=time.time()
-			logger.info("{} 分钟；结界 {} ，探索 {} "
-						.format(round((end-start)/60,1),tiaozhanTotalCountTemp,tansuoTotalCountTemp))
+			logger.info("{} 分；结界 {} ，探索 {}, 首领 {},绘卷中 {} "
+						.format(round((end-start)/60,1),
+								tiaozhanTotalCountTemp,
+								tansuoTotalCountTemp,
+								tansuoLeaderCount,
+								huijuanzhongCount))
 		sleep(5)
 
 pos=(0,0,1720,968)
@@ -122,6 +129,9 @@ def doJiejie():
 					return
 				sleep(10)
 				while True:
+					if find(huijuanzhongImg):
+						global huijuanzhongCount
+						huijuanzhongCount=huijuanzhongCount+1
 					if button(endImg):
 						# logger.info("第{}次，挑战成功".format(tiaozhancount))
 						sleep(1)
@@ -166,10 +176,12 @@ def doTansou(n):
 	jieshuImg = Image.open("tansuoImg/结束探索.png")
 	while True:
 		global tansuoTotalCount
+		global tansuoLeaderCount
 		if button(attackLeaderImg):
 			logger.info("attackLeader次数:" + str(leaderCount))
 			leaderCount = leaderCount + 1
 			tansuoTotalCount=tansuoTotalCount+1
+			tansuoLeaderCount=tansuoLeaderCount+1
 			time.sleep(5)
 			continue
 		if button(attackImg):
@@ -189,6 +201,9 @@ def doTansou(n):
 		if button(exploreImg):
 			time.sleep(2)
 			continue
+		if find(huijuanzhongImg):
+			global huijuanzhongCount
+			huijuanzhongCount=huijuanzhongCount+1
 		# X: 2196 , Y:  809
 		pyautogui.moveTo(1500, 720)
 		pyautogui.click()
