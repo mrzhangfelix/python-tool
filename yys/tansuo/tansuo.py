@@ -58,7 +58,7 @@ def main():
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
 	while True:
-		doJiejie()
+		# doJiejie()
 		doTansou(50)
 
 

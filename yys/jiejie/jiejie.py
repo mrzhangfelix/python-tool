@@ -6,29 +6,30 @@ import win32api,win32con,win32gui
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 
-def main():
+def main(delay,countnum):
+	print("delay:{},countNum:{}".format(delay,countnum))
 	count=0
 	shibaicount=0
 	pos=(0,0,1720,968)
 	# 打开窗口在固定位置
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
-	attackImg = Image.open("attack.png")
-	noattackImg = Image.open("medal.png")
-	endImg = Image.open("end.png")
-	shibaiImg = Image.open("shibai.png")
-	sleep(0*60)
-	while count<666:
+	attackImg = Image.open("img/attack.png")
+	noattackImg = Image.open("img/medal.png")
+	endImg = Image.open("img/end.png")
+	shibaiImg = Image.open("img/shibai.png")
+	sleep(delay*60)
+	while count<countnum:
 		if button(noattackImg,pos):
-			print("点击noattack按钮")
+			print('点击noattack按钮')
 			sleep(1)
 			if button(attackImg,pos):
-				print("点击attack按钮")
+				print('点击attack按钮')
 				sleep(5)
 		if button(endImg,pos):
 			while button(endImg,pos):
 				sleep(1)
-			print("点击end按钮")
+			print('点击end按钮')
 			count=count+1
 			print("chengong count:{}".format(count))
 			sleep(1)
@@ -76,4 +77,4 @@ def get_window_pos(name,pos):
 
 
 if __name__ == '__main__':
-	main()
+	main(0,666)

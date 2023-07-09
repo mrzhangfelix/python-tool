@@ -13,11 +13,11 @@ def main():
 	# 打开窗口在固定位置
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
-	attackImg = Image.open("attack.png")
-	noattackImg = Image.open("medal.png")
-	shibaiImg = Image.open("shibai.png")
-	tuichuImg = Image.open("退出.png")
-	querenImg = Image.open("确认.png")
+	attackImg = Image.open("img/attack.png")
+	noattackImg = Image.open("img/medal.png")
+	shibaiImg = Image.open("img/shibai.png")
+	tuichuImg = Image.open("img/退出.png")
+	querenImg = Image.open("img/确认.png")
 	while shibaicount<9:
 		if button(noattackImg,pos):
 			sleep(1)
