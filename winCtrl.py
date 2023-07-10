@@ -1,6 +1,7 @@
 import win32api,win32con,win32gui
 import time
 
+# 測試打開桌面窗口
 
 def get_window_pos(name):
     handle = win32gui.FindWindow(0, '有道云笔记')
