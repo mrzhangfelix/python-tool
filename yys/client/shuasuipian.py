@@ -9,10 +9,10 @@ class yaoqi:
 		self.teamUpImg = Image.open("img/yaoqi/teamUp.png")
 		self.jieshouImg = Image.open("img/yaoqi/接受邀请.png")
 		self.quxiaoImg = Image.open("img/yaoqi/是否邀请.png")
-		self.prepareImg = Image.open("img/yaoqi/prepare.png")
 		self.yaoqiImg = Image.open("img/yaoqi/yaoqi.png")
 		self.jiaruImg = Image.open("img/yaoqi/jiaru.png")
 		self.tianzhanImg = Image.open("img/yaoqi/tiaozhan.png")
+		self.endImg = Image.open("img/yaoqi/end.png")
 
 	#刷碎片用
 	def dowork(self):
@@ -34,14 +34,14 @@ class yaoqi:
 			time.sleep(0.5)
 			while button(self.jiaruImg,pos):
 				time.sleep(0.5)
-		if button(self.prepareImg,pos):
-			while button(self.prepareImg,pos):
+		if button(self.endImg,pos):
+			while button(self.endImg,pos):
 				time.sleep(1)
 			self.count+=1
-			print("开始次数:{}".format(self.count))
-			time.sleep(10)
+			print("次数:{}".format(self.count))
+			time.sleep(1)
 		click()
-		time.sleep(1)
+		time.sleep(2)
 		return self.count
 
 
