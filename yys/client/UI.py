@@ -7,6 +7,8 @@ from threading import Thread
 from threading import Event
 
 import jiejieExit
+import jiejie
+import clickService
 from yys.client import win32guiUtil
 
 # 日志处理的类
@@ -22,15 +24,34 @@ class TextboxHander(logging.Handler):
 
 
 class App:
-    def threadTest(self, event):
-        for i in range(100):
+    def threadJieJie(self, event,delayTime):
+        jiejieService = jiejie.jiejie()
+        pos = (0, 0, 1720, 968)
+        # 打开窗口在固定位置
+        win32guiUtil.get_window_pos("阴阳师 - MuMu模拟器", pos)
+        time.sleep(int(delayTime)*60)
+        while True:
             if event.is_set():
-                print("tread is stopping")
-                self.log.info("tread is stopping" + str(i))
+                self.log.info("tread is stopping")
                 break
+            count=jiejieService.dowork()
             time.sleep(1)
-            print("tread is running")
-            self.log.info("tread is running" + str(i))
+            self.log.info("jiejie is running,count:" + str(count))
+        self.log.info("jiejie is end,count:" + str(count))
+
+    def threadclick(self, event):
+        click = clickService.clickService()
+        pos = (0, 0, 1720, 968)
+        # 打开窗口在固定位置
+        win32guiUtil.get_window_pos("阴阳师 - MuMu模拟器", pos)
+        while True:
+            if event.is_set():
+                self.log.info("tread is stopping")
+                break
+            click.dowork()
+            time.sleep(1)
+            self.log.info("click is running")
+        self.log.info("click is end")
 
     def threadJieJieExit(self, event,ExitCount):
         jiejie_exit = jiejieExit.jiejieExit()
@@ -45,14 +66,24 @@ class App:
             time.sleep(1)
             shibaiCount = jiejie_exit.dowork()
             self.log.info("JieJieExit is running,shibaicount:" + str(shibaiCount))
+        self.log.info("JieJieExit is end,shibaicount:" + str(shibaiCount))
 
     def start(self, startType):
         self.event.clear()
         # daemon 表示 主线程不需要等待子线程结束才能结束，如果daemon等于flase(默认)，那么结束主进程会去等子进程结束
         if startType == 1:
-            print(self.entryExitCount.get())
-            self.thread1 = Thread(name='jiejieExitThread', target=self.threadJieJieExit, args=(self.event,self.entryExitCount.get()), daemon=True)
-        self.thread1.start()
+            if self.entryExitCount.get()== "":
+                self.log.info("请检查输入参数")
+                return
+            self.threadservice = Thread(name='jiejieExitThread', target=self.threadJieJieExit,
+                                        args=(self.event,self.entryExitCount.get()), daemon=True)
+        if startType == 2:
+            self.threadservice= Thread(name='jiejieThread', target=self.threadJieJie,
+                                       args=(self.event,self.entryDelayTime.get()), daemon=True)
+        if startType == 3:
+            self.threadservice= Thread(name='clickThread', target=self.threadclick,
+                                       args=(self.event,), daemon=True)
+        self.threadservice.start()
 
     def end(self):
         self.log.info("end all task")
@@ -68,27 +99,35 @@ class App:
         labelJiejieExit = tk.Label(master=frame1, text="结界退出：",background="red")
         labelExitCount = tk.Label(master=frame1, text="退出次数")
         self.entryExitCount = tk.Entry(master=frame1, width=20)
-        startBtn = tk.Button(master=frame1, text="start", width=20, command=lambda: self.start(1))
+        startBtn = tk.Button(master=frame1, text="start jiejie Exit", width=20, command=lambda: self.start(1))
 
         labelJiejieExit.pack(side=tk.LEFT)
         labelExitCount.pack(side=tk.LEFT)
         self.entryExitCount.pack(side=tk.LEFT)
         startBtn.pack(side=tk.LEFT)
 
-        # 功能2
+        # 结界突破功能
         frame2 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame2.grid(row=1, column=0)
 
-        label2 = tk.Label(master=frame2, text="文本标签")
-        entry2 = tk.Entry(master=frame2, width=20)
-        startBtn2 = tk.Button(master=frame2, text="Click me!", width=20)
+        label2 = tk.Label(master=frame2, text="延时")
+        self.entryDelayTime = tk.Entry(master=frame2, width=20)
+        startBtn2 = tk.Button(master=frame2, text="开始结界突破!", width=20,command=lambda: self.start(2))
 
         label2.pack(side=tk.LEFT)
-        entry2.pack(side=tk.LEFT)
+        self.entryDelayTime.pack(side=tk.LEFT)
+        startBtn2.pack(side=tk.LEFT)
+        # 开始连续点击
+        frame3 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
+        frame3.grid(row=2, column=0)
+
+        startBtn2 = tk.Button(master=frame3, text="开始连续点击", width=20,command=lambda: self.start(3))
+
         startBtn2.pack(side=tk.LEFT)
 
+        # 日志显示
         logFrame = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
-        logFrame.grid(row=2, column=0)
+        logFrame.grid(row=3, column=0)
         logLabel = tk.Label(master=logFrame, text="日志", width=10)
         logLabel.pack(side=tk.LEFT)
         logText = tk.Text(master=logFrame, width=50, height=5)
@@ -99,8 +138,9 @@ class App:
         handler = TextboxHander(logText)
         self.log.addHandler(handler)
 
+        #结束按钮
         endFrame = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
-        endFrame.grid(row=3, column=0)
+        endFrame.grid(row=4, column=0)
         endBtn = tk.Button(master=endFrame, text="end", width=20, command=self.end)
         endBtn.pack(side=tk.LEFT)
 

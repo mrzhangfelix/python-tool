@@ -7,7 +7,6 @@ class jiejie:
 	def __init__(self):
 		self.count=0
 		self.shibaicount=0
-		self.pos=(0,0,1720,968)
 		# 打开窗口在固定位置
 		self.attackImg = Image.open("img/attack.png")
 		self.noattackImg = Image.open("img/medal.png")
@@ -37,6 +36,7 @@ class jiejie:
 			print("shibai count:{}".format(self.shibaicount))
 			sleep(1)
 		sleep(1)
+		return self.count
 
 
 if __name__ == '__main__':
