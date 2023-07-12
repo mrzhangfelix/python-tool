@@ -8,10 +8,10 @@ class jiejie:
 		self.count=0
 		self.shibaicount=0
 		# 打开窗口在固定位置
-		self.attackImg = Image.open("img/attack.png")
-		self.noattackImg = Image.open("img/medal.png")
-		self.endImg = Image.open("img/end.png")
-		self.shibaiImg = Image.open("img/shibai.png")
+		self.attackImg = Image.open("img/jiejie/attack.png")
+		self.noattackImg = Image.open("img/jiejie/medal.png")
+		self.endImg = Image.open("img/jiejie/end.png")
+		self.shibaiImg = Image.open("img/jiejie/shibai.png")
 
 	def dowork(self):
 		pos=(0,0,1720,968)

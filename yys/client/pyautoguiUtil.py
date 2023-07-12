@@ -10,3 +10,6 @@ def button(Img,pos):
         center=pyautogui.center((x,y,width,height))
         pyautogui.click(center)
         return True
+
+def click():
+    pyautogui.click(1500,720)

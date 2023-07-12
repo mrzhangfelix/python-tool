@@ -5,11 +5,11 @@ import pyautoguiUtil
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejieExit:
 	def __init__(self):
-		self.attackImg = Image.open("img/attack.png")
-		self.noattackImg = Image.open("img/medal.png")
-		self.shibaiImg = Image.open("img/shibai.png")
-		self.tuichuImg = Image.open("img/退出.png")
-		self.querenImg = Image.open("img/确认.png")
+		self.attackImg = Image.open("img/jiejie/attack.png")
+		self.noattackImg = Image.open("img/jiejie/medal.png")
+		self.shibaiImg = Image.open("img/jiejie/shibai.png")
+		self.tuichuImg = Image.open("img/jiejie/退出.png")
+		self.querenImg = Image.open("img/jiejie/确认.png")
 		self.shibaicount=0
 
 	def dowork(self):
