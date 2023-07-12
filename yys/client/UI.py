@@ -12,6 +12,8 @@ import clickService
 import shuasuipian
 from yys.client import win32guiUtil
 
+
+startTime=time.time()
 # 日志处理的类
 class TextboxHander(logging.Handler):
     def __init__(self, textbox):
@@ -21,7 +23,8 @@ class TextboxHander(logging.Handler):
     def emit(self, record):
         msg = self.format(record)
         self.textbox.delete("1.0", "end")
-        self.textbox.insert("end", msg + "\n")
+        curTime=time.time()
+        self.textbox.insert("end", "时间:{} msg:{}".format(round((curTime - startTime)/60,1),msg)+ "\n")
 
 
 class App:
@@ -31,6 +34,7 @@ class App:
         # 打开窗口在固定位置
         win32guiUtil.get_window_pos("阴阳师 - MuMu模拟器", pos)
         time.sleep(int(delayTime)*60)
+        count=0
         while True:
             if event.is_set():
                 self.log.info("tread is stopping")
@@ -86,6 +90,8 @@ class App:
 
     def start(self, startType):
         self.event.clear()
+        global startTime
+        startTime=time.time()
         # daemon 表示 主线程不需要等待子线程结束才能结束，如果daemon等于flase(默认)，那么结束主进程会去等子进程结束
         if startType == 1:
             if self.entryExitCount.get()== "":

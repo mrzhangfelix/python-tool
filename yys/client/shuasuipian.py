@@ -33,14 +33,17 @@ class yaoqi:
 		if button(self.yaoqiImg,pos):
 			time.sleep(0.5)
 			while button(self.jiaruImg,pos):
+				print("jiaruImg")
 				time.sleep(0.5)
 		if button(self.endImg,pos):
 			while button(self.endImg,pos):
+				print("endImg")
 				time.sleep(1)
 			self.count+=1
 			print("次数:{}".format(self.count))
 			time.sleep(1)
 		click()
+		print("click")
 		time.sleep(2)
 		return self.count
 
