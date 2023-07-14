@@ -1,9 +1,11 @@
 import sys
 from time import sleep
 from PIL import Image
+from pyautogui import FailSafeException
+
 sys.path.append("")
-from utils import pyautoguiUtil
-from utils.pyautoguiUtil import resource_path
+from utils.pyautoguiUtil import resource_path, button, autoAlert
+
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejie:
@@ -17,21 +19,21 @@ class jiejie:
 		self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
 
 	def dowork(self):
-		if pyautoguiUtil.button(self.noattackImg):
+		if button(self.noattackImg):
 			print('点击noattack按钮')
 			sleep(1)
-			if pyautoguiUtil.button(self.attackImg):
+			if button(self.attackImg):
 				print('点击attack按钮')
 				sleep(5)
-		if pyautoguiUtil.button(self.endImg):
-			while pyautoguiUtil.button(self.endImg):
+		if button(self.endImg):
+			while button(self.endImg):
 				sleep(1)
 			print('点击end按钮')
 			self.count= self.count + 1
 			print("chengong count:{}".format(self.count))
 			sleep(1)
-		if pyautoguiUtil.button(self.shibaiImg):
-			while pyautoguiUtil.button(self.shibaiImg):
+		if button(self.shibaiImg):
+			while button(self.shibaiImg):
 				sleep(1)
 			print("点击shibai按钮")
 			self.shibaicount=self.shibaicount+1
@@ -41,16 +43,20 @@ class jiejie:
 		return self.count
 
 	def threadJieJie(self, UI,delayTime):
-		sleep(delayTime*60)
-		count=0
-		while True:
-			if UI.event.is_set():
-				UI.log.info("tread is stopping")
-				break
-			count=self.dowork()
-			sleep(1)
-			UI.log.info("jiejie is running,count:" + str(count))
-		UI.log.info("jiejie is end,count:" + str(count))
+		try:
+			sleep(delayTime*60)
+			count=0
+			while True:
+				if UI.event.is_set():
+					UI.log.info("tread is stopping")
+					break
+				count=self.dowork()
+				sleep(1)
+				UI.log.info("jiejie is running,count:" + str(count))
+			UI.log.info("jiejie is end,count:" + str(count))
+		except FailSafeException:
+			UI.log.error("程序安全退出")
+			autoAlert("程序安全退出")
 
 if __name__ == '__main__':
 	jiejie=jiejie()

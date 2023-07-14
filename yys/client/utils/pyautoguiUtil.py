@@ -1,13 +1,16 @@
 import pyautogui
 import sys
 import os
+
 def resource_path(relative_path):
     if getattr(sys, 'frozen', False):  # 判断sys中是否存在frozen变量,即是否是打包程序
         base_path = sys._MEIPASS # sys._MEIPASS在一些编辑器中会报错，不用理会
     else:
         base_path = os.path.abspath(".")
-    print(base_path)
+    # print(base_path)
     return os.path.join(base_path, relative_path)
+
+
 def buttonWithPos(Img,pos):
     msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=pos)
     if msg == None:
@@ -30,3 +33,9 @@ def find(Img):
 
 def click():
     pyautogui.click(1500,720)
+
+def clickPos(x,y):
+    pyautogui.click(x,y)
+
+def autoAlert(msg):
+    pyautogui.alert(msg)

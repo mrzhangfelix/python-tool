@@ -1,5 +1,8 @@
 import time
-from utils.pyautoguiUtil import button,click,resource_path
+
+from pyautogui import FailSafeException
+
+from utils.pyautoguiUtil import button, click, resource_path, autoAlert
 from PIL import Image
 
 
@@ -13,6 +16,8 @@ class yaoqi:
 		self.jiaruImg = Image.open(resource_path("img/yaoqi/jiaru.png"))
 		self.tianzhanImg = Image.open(resource_path("img/yaoqi/tiaozhan.png"))
 		self.endImg = Image.open(resource_path("img/yaoqi/end.png"))
+		self.jieshouyaoqingzuobiao=(250,350)
+		self.jujueyaoqingzuobiao=(130,350)
 
 	#刷碎片用
 	def dowork(self):
@@ -44,15 +49,19 @@ class yaoqi:
 		return self.count
 
 	def threadSuipian(self, UI):
-		count=0
-		while True:
-			if UI.event.is_set():
-				UI.log.info("suipianService is stopping")
-				break
-			count=self.dowork()
-			time.sleep(1)
-			UI.log.info("suipianService is running,count:"+str(count))
-		UI.log.info("suipianService is end,count:"+str(count))
+		try:
+			count=0
+			while True:
+				if UI.event.is_set():
+					UI.log.info("suipianService is stopping")
+					break
+				count=self.dowork()
+				time.sleep(1)
+				UI.log.info("suipianService is running,count:"+str(count))
+			UI.log.info("suipianService is end,count:"+str(count))
+		except FailSafeException:
+			UI.log.error("程序安全退出")
+			autoAlert("程序安全退出")
 
 
 if __name__ == '__main__':

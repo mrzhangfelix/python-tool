@@ -2,6 +2,9 @@ import time
 from time import sleep
 import pyautogui
 
+from yys.client.utils.pyautoguiUtil import autoAlert
+
+
 class clickService:
     def __init__(self):
         self.x=1500
@@ -24,6 +27,7 @@ class clickService:
             UI.log.info("click is end")
         except pyautogui.FailSafeException:
             UI.log.error("程序安全退出")
+            autoAlert("程序安全退出")
 
 
 if __name__ == '__main__':

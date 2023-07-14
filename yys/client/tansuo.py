@@ -1,8 +1,10 @@
 import time
 from time import sleep
 from PIL import Image
+from pyautogui import FailSafeException
 
-from utils.pyautoguiUtil import button,find,click,resource_path
+from utils.pyautoguiUtil import button, find, click, resource_path, autoAlert
+
 
 class tansuo:
     def __init__(self):
@@ -141,12 +143,16 @@ class tansuo:
 
 
     def threadHuijuan(self, UI):
-        self.UI=UI
-        while True:
-            if self.UI.event.is_set():
-                break
-            self.doJiejie()
-            self.doTansou(50)
+        try:
+            self.UI=UI
+            while True:
+                if self.UI.event.is_set():
+                    break
+                self.doJiejie()
+                self.doTansou(50)
+        except FailSafeException:
+            UI.log.error("程序安全退出")
+            autoAlert("程序安全退出")
 
 
 if __name__ == '__main__':
