@@ -56,4 +56,6 @@ class yaoqi:
 
 
 if __name__ == '__main__':
-	yaoqi()
+	yaoqiservice = yaoqi()
+	while True:
+		yaoqiservice.dowork()

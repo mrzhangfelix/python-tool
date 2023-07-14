@@ -11,7 +11,7 @@ def buttonWithPos(Img,pos):
         pyautogui.click(center)
         return True
 def button(Img):
-    buttonWithPos(Img,(0,0,1720,968))
+    return buttonWithPos(Img,(0,0,1720,968))
 
 def find(Img):
     msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True,region=(0,0,1720,968))
