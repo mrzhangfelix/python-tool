@@ -1,7 +1,7 @@
 from time import sleep
 from PIL import ImageGrab, Image
 import pyautoguiUtil
-from pyautoguiUtil import button,find
+from pyautoguiUtil import resource_path
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejie:
@@ -9,10 +9,10 @@ class jiejie:
 		self.count=0
 		self.shibaicount=0
 		# 打开窗口在固定位置
-		self.attackImg = Image.open("img/jiejie/attack.png")
-		self.noattackImg = Image.open("img/jiejie/medal.png")
-		self.endImg = Image.open("img/jiejie/end.png")
-		self.shibaiImg = Image.open("img/jiejie/shibai.png")
+		self.attackImg = Image.open(resource_path("img/jiejie/attack.png"))
+		self.noattackImg = Image.open(resource_path("img/jiejie/medal.png"))
+		self.endImg = Image.open(resource_path("img/jiejie/end.png"))
+		self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
 
 	def dowork(self):
 		if pyautoguiUtil.button(self.noattackImg):

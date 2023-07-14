@@ -1,8 +1,6 @@
 import time
 from time import sleep
 import pyautogui
-from PIL import ImageGrab, Image
-import win32api,win32con,win32gui
 
 class clickService:
     def __init__(self):

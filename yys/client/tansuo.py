@@ -2,27 +2,27 @@ import time
 from time import sleep
 from PIL import ImageGrab, Image
 
-from pyautoguiUtil import button,find,click
+from pyautoguiUtil import button,find,click,resource_path
 
 class tansuo:
     def __init__(self):
-        self.attackImg = Image.open("img/tansuo/attack.png")
-        self.attackLeaderImg = Image.open("img/tansuo/attackLeader.png")
-        self.pickUpImg = Image.open("img/tansuo/pickUp.png")
-        self.exploreImg = Image.open("img/tansuo/explore.png")
-        self.jieshuImg = Image.open("img/tansuo/结束探索.png")
-        self.jieshouImg = Image.open("img/接受.png")
-        self.huijuanzhongImg = Image.open("img/绘卷中.png")
+        self.attackImg = Image.open(resource_path("img/tansuo/attack.png"))
+        self.attackLeaderImg = Image.open(resource_path("img/tansuo/attackLeader.png"))
+        self.pickUpImg = Image.open(resource_path("img/tansuo/pickUp.png"))
+        self.exploreImg = Image.open(resource_path("img/tansuo/explore.png"))
+        self.jieshuImg = Image.open(resource_path("img/tansuo/结束探索.png"))
+        self.jieshouImg = Image.open(resource_path("img/接受.png"))
+        self.huijuanzhongImg = Image.open(resource_path("img/绘卷中.png"))
 
-        self.attackImg = Image.open("img/jiejie/attack.png")
-        self.noattackImg = Image.open("img/jiejie/medal.png")
-        self.endImg = Image.open("img/jiejie/end.png")
-        self.shibaiImg = Image.open("img/jiejie/shibai.png")
-        self.kaishiImg = Image.open("img/jiejie/打开结界突破.png")
-        self.guanbiImg = Image.open("img/jiejie/关闭结界突破.png")
-        self.shuaxinImg = Image.open("img/jiejie/刷新.png")
-        self.quedingImg = Image.open("img/jiejie/确定退出.png")
-        self.huijuanzhongImg = Image.open("img/绘卷中.png")
+        self.attackImg = Image.open(resource_path("img/jiejie/attack.png"))
+        self.noattackImg = Image.open(resource_path("img/jiejie/medal.png"))
+        self.endImg = Image.open(resource_path("img/jiejie/end.png"))
+        self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
+        self.kaishiImg = Image.open(resource_path("img/jiejie/打开结界突破.png"))
+        self.guanbiImg = Image.open(resource_path("img/jiejie/关闭结界突破.png"))
+        self.shuaxinImg = Image.open(resource_path("img/jiejie/刷新.png"))
+        self.quedingImg = Image.open(resource_path("img/jiejie/确定退出.png"))
+        self.huijuanzhongImg = Image.open(resource_path("img/绘卷中.png"))
 
         self.tansuoTotalCount=0
         self.tansuoLeaderCount=0
