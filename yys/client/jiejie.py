@@ -1,7 +1,9 @@
+import sys
 from time import sleep
-from PIL import ImageGrab, Image
-import pyautoguiUtil
-from pyautoguiUtil import resource_path
+from PIL import Image
+sys.path.append("")
+from utils import pyautoguiUtil
+from utils.pyautoguiUtil import resource_path
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejie:

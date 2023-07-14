@@ -1,8 +1,8 @@
 import time
 from time import sleep
-from PIL import ImageGrab, Image
+from PIL import Image
 
-from pyautoguiUtil import button,find,click,resource_path
+from utils.pyautoguiUtil import button,find,click,resource_path
 
 class tansuo:
     def __init__(self):

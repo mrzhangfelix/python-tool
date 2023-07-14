@@ -6,13 +6,8 @@ import tkinter as tk
 from threading import Thread
 from threading import Event
 
-import jiejieExit
-import jiejie
-import clickService
-import shuasuipian
-import tansuo
-from yys.client import win32guiUtil
-
+import shuasuipian, jiejieExit, tansuo, jiejie, clickService
+from utils import win32guiUtil
 
 startTime=time.time()
 # 日志处理的类
@@ -52,7 +47,7 @@ class App:
             self.threadservice= Thread(name='jiejieThread', target=jiejieService.threadJieJie,
                                        args=(self, int(delay_time)), daemon=True)
         if startType == 3:
-            click=clickService.clickService()
+            click= clickService.clickService()
             self.threadservice= Thread(name='clickThread', target=click.threadclick,
                                        args=(self,), daemon=True)
         if startType == 4:

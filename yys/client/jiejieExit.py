@@ -1,6 +1,6 @@
 from time import sleep
-from PIL import ImageGrab, Image
-from pyautoguiUtil import button,resource_path
+from PIL import Image
+from utils.pyautoguiUtil import button,resource_path
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejieExit:

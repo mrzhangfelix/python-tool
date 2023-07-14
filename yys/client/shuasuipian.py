@@ -1,6 +1,6 @@
 import time
-from pyautoguiUtil import button,click,resource_path
-from PIL import ImageGrab, Image
+from utils.pyautoguiUtil import button,click,resource_path
+from PIL import Image
 
 
 class yaoqi:
