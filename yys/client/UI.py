@@ -66,7 +66,7 @@ class App:
         self.threadservice.start()
 
     def end(self):
-        self.log.info("end all task")
+        self.log.info("服务已停止")
         self.event.set()
 
     def __init__(self, window):

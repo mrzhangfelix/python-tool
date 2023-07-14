@@ -15,14 +15,17 @@ class clickService:
         sleep(1)
 
     def threadclick(self,UI):
-        while True:
-            if UI.event.is_set():
-                UI.log.info("tread is stopping")
-                break
-            self.dowork()
-            time.sleep(1)
-            UI.log.info("click is running")
-        UI.log.info("click is end")
+        try:
+            while True:
+                if UI.event.is_set():
+                    UI.log.info("tread is stopping")
+                    break
+                self.dowork()
+                time.sleep(1)
+                UI.log.info("click is running")
+            UI.log.info("click is end")
+        except pyautogui.FailSafeException:
+            UI.log.error("程序安全退出")
 
 
 if __name__ == '__main__':
