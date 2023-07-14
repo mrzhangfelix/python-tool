@@ -9,7 +9,7 @@ def main():
 	# pyautogui.moveTo(None, 100) # X方向不变，Y方向移动到100
 	# for i in range(30):
 	while True:
-		# pyautogui.moveRel(-10, -10, duration=2) # 相对位置移动
+		# pyautogui.moveRel(-10, -10, duration=2) # 相对位置移动#
 		# pyautogui.moveRel(10, 10, duration=2) # 相对位置移动
 		time.sleep(2)
 		# pyautogui.press('#')

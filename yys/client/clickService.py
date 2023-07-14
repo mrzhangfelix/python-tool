@@ -14,6 +14,16 @@ class clickService:
         pyautogui.click()
         sleep(1)
 
+    def threadclick(self,UI):
+        while True:
+            if UI.event.is_set():
+                UI.log.info("tread is stopping")
+                break
+            self.dowork()
+            time.sleep(1)
+            UI.log.info("click is running")
+        UI.log.info("click is end")
+
 
 if __name__ == '__main__':
     clickService=clickService()

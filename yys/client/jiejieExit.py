@@ -13,22 +13,32 @@ class jiejieExit:
 		self.shibaicount=0
 
 	def dowork(self):
-		pos=(0,0,1720,968)
-		if pyautoguiUtil.button(self.noattackImg,pos):
+		if pyautoguiUtil.button(self.noattackImg):
 			sleep(1)
-			if pyautoguiUtil.button(self.attackImg,pos):
+			if pyautoguiUtil.button(self.attackImg):
 				sleep(2)
 		# 点击退出
-		if pyautoguiUtil.button(self.tuichuImg,pos):
+		if pyautoguiUtil.button(self.tuichuImg):
 			sleep(2)
 		# 点击确认
-		if pyautoguiUtil.button(self.querenImg,pos):
+		if pyautoguiUtil.button(self.querenImg):
 			sleep(4)
-		if pyautoguiUtil.button(self.shibaiImg,pos):
+		if pyautoguiUtil.button(self.shibaiImg):
 			sleep(1)
 			self.shibaicount=self.shibaicount+1
 		sleep(1)
 		return self.shibaicount
+
+	def threadJieJieExit(self, UI, exitCount):
+		shibaiCount=0
+		while shibaiCount<exitCount:
+			if UI.event.is_set():
+				UI.log.info("JieJieExit is stopping,shibaicount:" + str(shibaiCount))
+				break
+			sleep(1)
+			shibaiCount = self.dowork()
+			UI.log.info("JieJieExit is running,shibaicount:" + str(shibaiCount))
+		UI.log.info("JieJieExit is end,shibaicount:" + str(shibaiCount))
 
 if __name__ == '__main__':
 	service=jiejieExit()

@@ -58,7 +58,7 @@ def main():
 	get_window_pos("阴阳师 - MuMu模拟器",pos)
 
 	while True:
-		# doJiejie()
+		doJiejie()
 		doTansou(50)
 
 
@@ -243,12 +243,6 @@ def find(Img):
 	else:
 		return True
 
-def find0(Img):
-	msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=False,region=pos)
-	if msg == None:
-		return False
-	else:
-		return True
 
 def get_window_pos(name,pos):
 	handle = win32gui.FindWindow(0, name)
