@@ -2,7 +2,7 @@ import time
 from time import sleep
 import pyautogui
 
-from yys.client.utils.pyautoguiUtil import autoAlert
+from pyautoguiUtil import autoAlert
 
 
 class clickService:

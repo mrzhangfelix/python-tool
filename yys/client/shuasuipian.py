@@ -2,8 +2,9 @@ import time
 
 from pyautogui import FailSafeException
 
-from utils.pyautoguiUtil import button, click, resource_path, autoAlert
+from pyautoguiUtil import resource_path,button,click
 from PIL import Image
+
 
 
 class yaoqi:

@@ -1,6 +1,6 @@
 from time import sleep
 from PIL import Image
-from utils.pyautoguiUtil import button, resource_path, autoAlert
+from pyautoguiUtil import button, resource_path, autoAlert
 from pyautogui import FailSafeException
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"

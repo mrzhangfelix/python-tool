@@ -7,7 +7,7 @@ from threading import Thread
 from threading import Event
 
 import shuasuipian, jiejieExit, tansuo, jiejie, clickService
-from utils import win32guiUtil
+import win32guiUtil
 
 startTime=time.time()
 # 日志处理的类

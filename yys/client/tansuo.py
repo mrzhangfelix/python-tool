@@ -3,7 +3,7 @@ from time import sleep
 from PIL import Image
 from pyautogui import FailSafeException
 
-from utils.pyautoguiUtil import button, find, click, resource_path, autoAlert
+from pyautoguiUtil import button, find, click, resource_path, autoAlert
 
 
 class tansuo:

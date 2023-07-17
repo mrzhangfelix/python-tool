@@ -4,7 +4,7 @@ from PIL import Image
 from pyautogui import FailSafeException
 
 sys.path.append("")
-from utils.pyautoguiUtil import resource_path, button, autoAlert
+from pyautoguiUtil import resource_path, button, autoAlert
 
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
