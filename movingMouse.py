@@ -13,8 +13,8 @@ def main():
 		# pyautogui.moveRel(10, 10, duration=2) # 相对位置移动
 		time.sleep(2)
 		# pyautogui.press('#')
-		pyautogui.moveTo(2360,776)
-		pyautogui.click()
+		pyautogui.moveTo(1500,720)
+		# pyautogui.click()
 
 if __name__ == '__main__':
 	main()
