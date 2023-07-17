@@ -3,14 +3,22 @@ from PIL import Image
 from pyautoguiUtil import button, resource_path, autoAlert
 from pyautogui import FailSafeException
 
+import constant
+
+
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejieExit:
 	def __init__(self):
-		self.attackImg = Image.open(resource_path("img/jiejie/attack.png"))
-		self.noattackImg = Image.open(resource_path("img/jiejie/medal.png"))
-		self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
-		self.tuichuImg = Image.open(resource_path("img/jiejie/退出.png"))
-		self.querenImg = Image.open(resource_path("img/jiejie/确认.png"))
+		self.attackImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/attack.png"))
+		self.noattackImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/medal.png"))
+		self.shibaiImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/shibai.png"))
+		self.tuichuImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/退出.png"))
+		self.querenImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/确认.png"))
 		self.shibaicount=0
 
 	def dowork(self):

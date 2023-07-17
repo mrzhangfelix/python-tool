@@ -2,17 +2,15 @@ import time
 from time import sleep
 import pyautogui
 
-from pyautoguiUtil import autoAlert
+from pyautoguiUtil import autoAlert,click
 
 
 class clickService:
     def __init__(self):
-        self.x=1500
-        self.y=720
+        pass
 
     def dowork(self):
-        pyautogui.moveTo(self.x,self.y)
-        pyautogui.click()
+        click()
         sleep(1)
 
     def threadclick(self,UI):

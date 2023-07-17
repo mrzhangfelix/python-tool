@@ -29,7 +29,7 @@ class App:
         global startTime
         startTime=time.time()
         # 打开窗口在固定位置
-        win32guiUtil.get_window_pos("阴阳师 - MuMu模拟器", (0, 0, 1720, 968))
+        win32guiUtil.get_window_pos()
         # daemon 表示 主线程不需要等待子线程结束才能结束，如果daemon等于flase(默认)，那么结束主进程会去等子进程结束
         if startType == 1:
             exitCount=self.entryExitCount.get()
@@ -55,9 +55,15 @@ class App:
             self.threadservice= Thread(name='threadSuipian', target=suipianService.threadSuipian,
                                        args=(self,), daemon=True)
         if startType == 5:
+            # 挑战次数
+            tiaozhanCount=self.entryTiaozhanCount.get()
+            if tiaozhanCount == "":
+                self.log.info("输入参数为空,9次")
+                exitCount=9
+            jiejie_swith=self.jiejieCheckbutton.getboolean()
             tansuoService = tansuo.tansuo()
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
-                                       args=(self,), daemon=True)
+                                       args=(self,tiaozhanCount,jiejie_swith), daemon=True)
         self.threadservice.start()
 
     def end(self):
@@ -65,7 +71,8 @@ class App:
         self.event.set()
 
     def __init__(self, window):
-        window.title("yyds")
+        window.title("yys")
+        window.geometry('+1280+0')
         # 控制线程终止
         self.event = Event()
         rowNum=0
@@ -88,10 +95,12 @@ class App:
         frame2 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame2.grid(row=rowNum, column=0)
 
+        labelJiejietupo = tk.Label(master=frame2, text="结界突破：",background="red")
         label2 = tk.Label(master=frame2, text="延时")
         self.entryDelayTime = tk.Entry(master=frame2, width=20)
         startBtn2 = tk.Button(master=frame2, text="开始结界突破!", width=20,command=lambda: self.start(2))
 
+        labelJiejietupo.pack(side=tk.LEFT)
         label2.pack(side=tk.LEFT)
         self.entryDelayTime.pack(side=tk.LEFT)
         startBtn2.pack(side=tk.LEFT)
@@ -117,6 +126,12 @@ class App:
         frame5 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame5.grid(row=rowNum, column=0)
 
+        tiaozhanCount = tk.Label(master=frame5, text="探索次数")
+        tiaozhanCount.pack(side=tk.LEFT)
+        self.entryTiaozhanCount = tk.Entry(master=frame5, width=20)
+        self.entryTiaozhanCount.pack(side=tk.LEFT)
+        self.jiejieCheckbutton= tk.Checkbutton(master=frame5, text='是否打结界')#创建复选框
+        self.jiejieCheckbutton.pack(side=tk.LEFT)
         startBtn5 = tk.Button(master=frame5, text="开始刷绘卷", width=20,command=lambda: self.start(5))
         startBtn5.pack(side=tk.LEFT)
 

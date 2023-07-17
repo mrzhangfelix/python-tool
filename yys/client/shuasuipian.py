@@ -5,18 +5,27 @@ from pyautogui import FailSafeException
 from pyautoguiUtil import resource_path,button,click
 from PIL import Image
 
+import constant
 
 
 class yaoqi:
 	def __init__(self):
 		self.count=0
-		self.teamUpImg = Image.open(resource_path("img/yaoqi/teamUp.png"))
-		self.jieshouImg = Image.open(resource_path("img/yaoqi/接受邀请.png"))
-		self.quxiaoImg = Image.open(resource_path("img/yaoqi/是否邀请.png"))
-		self.yaoqiImg = Image.open(resource_path("img/yaoqi/yaoqi.png"))
-		self.jiaruImg = Image.open(resource_path("img/yaoqi/jiaru.png"))
-		self.tianzhanImg = Image.open(resource_path("img/yaoqi/tiaozhan.png"))
-		self.endImg = Image.open(resource_path("img/yaoqi/end.png"))
+		self.teamUpImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/teamUp.png"))
+		self.jieshouImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/接受邀请.png"))
+		self.quxiaoImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/是否邀请.png"))
+		self.yaoqiImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/yaoqi.png"))
+		self.jiaruImg = Image.open\
+			(resource_path(constant.resolution_folder+"img/yaoqi/jiaru.png"))
+		self.tianzhanImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/tiaozhan.png"))
+		self.endImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/end.png"))
+
 		self.jieshouyaoqingzuobiao=(250,350)
 		self.jujueyaoqingzuobiao=(130,350)
 

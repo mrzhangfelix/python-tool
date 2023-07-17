@@ -2,6 +2,7 @@ import sys
 from time import sleep
 from PIL import Image
 from pyautogui import FailSafeException
+import constant
 
 sys.path.append("")
 from pyautoguiUtil import resource_path, button, autoAlert
@@ -13,10 +14,14 @@ class jiejie:
 		self.count=0
 		self.shibaicount=0
 		# 打开窗口在固定位置
-		self.attackImg = Image.open(resource_path("img/jiejie/attack.png"))
-		self.noattackImg = Image.open(resource_path("img/jiejie/medal.png"))
-		self.endImg = Image.open(resource_path("img/jiejie/end.png"))
-		self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
+		self.attackImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/attack.png"))
+		self.noattackImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/medal.png"))
+		self.endImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/end.png"))
+		self.shibaiImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/shibai.png"))
 
 	def dowork(self):
 		if button(self.noattackImg):

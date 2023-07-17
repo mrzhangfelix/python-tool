@@ -4,38 +4,55 @@ from PIL import Image
 from pyautogui import FailSafeException
 
 from pyautoguiUtil import button, find, click, resource_path, autoAlert
+import constant
 
 
 class tansuo:
     def __init__(self):
-        self.attackImg = Image.open(resource_path("img/tansuo/attack.png"))
-        self.attackLeaderImg = Image.open(resource_path("img/tansuo/attackLeader.png"))
-        self.pickUpImg = Image.open(resource_path("img/tansuo/pickUp.png"))
-        self.exploreImg = Image.open(resource_path("img/tansuo/explore.png"))
-        self.jieshuImg = Image.open(resource_path("img/tansuo/结束探索.png"))
-        self.jieshouImg = Image.open(resource_path("img/接受.png"))
-        self.huijuanzhongImg = Image.open(resource_path("img/绘卷中.png"))
+        self.attackImg = Image.open(resource_path(
+            constant.resolution_folder + "/tansuo/attack.png"))
+        self.attackLeaderImg = Image.open(resource_path(
+            constant.resolution_folder + "/tansuo/attackLeader.png"))
+        self.pickUpImg = Image.open(resource_path(
+            constant.resolution_folder + "/tansuo/pickUp.png"))
+        self.exploreImg = Image.open(resource_path(
+            constant.resolution_folder + "/tansuo/explore.png"))
+        self.jieshuImg = Image.open(resource_path(
+            constant.resolution_folder + "/tansuo/结束探索.png"))
+        self.jieshouImg = Image.open(resource_path(
+            constant.resolution_folder + "/接受.png"))
+        self.huijuanzhongImg = Image.open(resource_path(
+            constant.resolution_folder + "/绘卷中.png"))
 
-        self.attackImg = Image.open(resource_path("img/jiejie/attack.png"))
-        self.noattackImg = Image.open(resource_path("img/jiejie/medal.png"))
-        self.endImg = Image.open(resource_path("img/jiejie/end.png"))
-        self.shibaiImg = Image.open(resource_path("img/jiejie/shibai.png"))
-        self.kaishiImg = Image.open(resource_path("img/jiejie/打开结界突破.png"))
-        self.guanbiImg = Image.open(resource_path("img/jiejie/关闭结界突破.png"))
-        self.shuaxinImg = Image.open(resource_path("img/jiejie/刷新.png"))
-        self.quedingImg = Image.open(resource_path("img/jiejie/确定退出.png"))
-        self.huijuanzhongImg = Image.open(resource_path("img/绘卷中.png"))
+        self.attackImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/attack.png"))
+        self.noattackImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/medal.png"))
+        self.endImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/end.png"))
+        self.shibaiImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/shibai.png"))
+        self.kaishiImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/打开结界突破.png"))
+        self.guanbiImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/关闭结界突破.png"))
+        self.shuaxinImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/刷新.png"))
+        self.quedingImg = Image.open(resource_path(
+            constant.resolution_folder + "/jiejie/确定退出.png"))
+        self.huijuanzhongImg = Image.open(resource_path(
+            constant.resolution_folder + "/绘卷中.png"))
 
-        self.tansuoTotalCount=0
-        self.tansuoLeaderCount=0
-        self.huijuanzhongCount=0
-        self.tiaozhanTotalCount=0
+        self.tansuoTotalCount = 0
+        self.tansuoLeaderCount = 0
+        self.huijuanzhongCount = 0
+        self.tiaozhanTotalCount = 0
 
-        self.UI=None
+        self.UI = None
 
     def print_tansuo_status(self):
         msg = "探索总数：{},探索轮数：{}，结界数：{}，绘卷中数：{}".format(
-            self.tansuoTotalCount, self.tansuoLeaderCount,self.tiaozhanTotalCount, self.huijuanzhongCount)
+            self.tansuoTotalCount, self.tansuoLeaderCount, self.tiaozhanTotalCount, self.huijuanzhongCount)
         print(msg)
         self.UI.log.info(msg)
 
@@ -63,7 +80,7 @@ class tansuo:
                         if self.UI.event.is_set():
                             break
                         if find(self.huijuanzhongImg):
-                            self.huijuanzhongCount+=1
+                            self.huijuanzhongCount += 1
                             self.print_tansuo_status()
                         if button(self.endImg):
                             # logger.info("第{}次，挑战成功".format(tiaozhancount))
@@ -71,7 +88,7 @@ class tansuo:
                             while button(self.endImg):
                                 # logger.info("第{}次，挑战成功".format(tiaozhancount))
                                 sleep(1)
-                            self.tiaozhanTotalCount+=1
+                            self.tiaozhanTotalCount += 1
                             self.print_tansuo_status()
                             sleep(1)
                             break
@@ -88,24 +105,24 @@ class tansuo:
                 self.UI.log.error("没有可以挑战的结界，存在挑战失败")
                 self.buttonshuaxin()
 
-    def doTansou(self,n):
+    def doTansou(self, n):
         self.UI.log.info("开始探索")
-        attackCount=0
+        attackCount = 0
         while True:
             if self.UI.event.is_set():
                 break
             if button(self.attackLeaderImg):
-                self.tansuoTotalCount+=1
-                self.tansuoLeaderCount+=1
+                self.tansuoTotalCount += 1
+                self.tansuoLeaderCount += 1
                 self.print_tansuo_status()
-                attackCount+=1
+                attackCount += 1
                 time.sleep(5)
                 continue
             if button(self.attackImg):
                 # logger.info("attack次数:" + str(attackCount))
-                self.tansuoTotalCount+=1
+                self.tansuoTotalCount += 1
                 self.print_tansuo_status()
-                attackCount+=1
+                attackCount += 1
                 time.sleep(5)
                 continue
             if button(self.pickUpImg):
@@ -119,7 +136,7 @@ class tansuo:
                 time.sleep(2)
                 continue
             if find(self.huijuanzhongImg):
-                self.huijuanzhongCount+=1
+                self.huijuanzhongCount += 1
                 self.print_tansuo_status()
             # X: 2196 , Y:  809
             click()
@@ -141,14 +158,16 @@ class tansuo:
                 self.UI.log.info("刷新成功")
                 sleep(2)
 
-
-    def threadHuijuan(self, UI):
+    def threadHuijuan(self, UI, tiaozhanCount, jiejie_swith):
         try:
-            self.UI=UI
+            self.UI = UI
             while True:
                 if self.UI.event.is_set():
                     break
-                self.doJiejie()
+                if self.tiaozhanTotalCount > tiaozhanCount:
+                    break
+                if jiejie_swith:
+                    self.doJiejie()
                 self.doTansou(50)
         except FailSafeException:
             UI.log.error("程序安全退出")
@@ -156,4 +175,4 @@ class tansuo:
 
 
 if __name__ == '__main__':
-    tansuo=tansuo()
+    tansuo = tansuo()
