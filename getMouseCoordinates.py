@@ -17,5 +17,6 @@ def getRealtimeMouseCoordinates():
         print('Exit')
 
 
+        
 if __name__ == '__main__':
     getRealtimeMouseCoordinates()

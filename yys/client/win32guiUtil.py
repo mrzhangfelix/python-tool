@@ -1,7 +1,7 @@
 import win32api,win32con,win32gui
 import time
 
-from yys.client import constant
+import constant
 
 
 def get_window_pos():

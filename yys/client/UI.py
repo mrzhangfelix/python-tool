@@ -3,11 +3,15 @@
 import logging
 import time
 import tkinter as tk
-from threading import Thread
 from threading import Event
+from threading import Thread
 
-import shuasuipian, jiejieExit, tansuo, jiejie, clickService
+import clickService
+import jiejie
+import jiejieExit
+import tansuo
 import win32guiUtil
+import yaoqifengyin
 
 startTime=time.time()
 # 日志处理的类
@@ -51,7 +55,7 @@ class App:
             self.threadservice= Thread(name='clickThread', target=click.threadclick,
                                        args=(self,), daemon=True)
         if startType == 4:
-            suipianService = shuasuipian.yaoqi()
+            suipianService = yaoqifengyin.yaoqi()
             self.threadservice= Thread(name='threadSuipian', target=suipianService.threadSuipian,
                                        args=(self,), daemon=True)
         if startType == 5:
