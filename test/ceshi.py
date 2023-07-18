@@ -1,41 +1,35 @@
-import sys
 from time import sleep
-import pyautogui
-from PIL import Image
-import os
+import win32api,win32con,win32gui
 
-# 生成资源文件目录访问路径
-def resource_path(relative_path):
-    if getattr(sys, 'frozen', False):  # 判断sys中是否存在frozen变量,即是否是打包程序
-        base_path = sys._MEIPASS # sys._MEIPASS在一些编辑器中会报错，不用理会
-    else:
-        base_path = os.path.abspath(".")
-    print(base_path)
-    return os.path.join(base_path, relative_path)
 
 def main():
     print("开始工作")
-    print(sys._MEIPASS)
-    ceshiImg = Image.open(resource_path("ceshi.png"))
-    print("加载图片成功")
-    while True:
-        button(ceshiImg)
-        sleep(2)
+    get_window_pos()
 
-def button(Img):
-    msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True)
-    if msg == None:
-        return False
+
+def get_window_pos():
+    name="腾讯文档"
+    pos=(0,0,1028,720)
+    handle = win32gui.FindWindow(0, name)
+    # 获取窗口句柄
+    if handle == 0:
+        print("not found windows")
+        exit()
     else:
-        x, y, width, height = msg
-        # print("X={},Y={}，宽{}像素,高{}像素".format(x, y, width, height))
-        center=pyautogui.center((x,y,width,height))
-        pyautogui.click(center)
-        return True
-
-def getImg(path):
-    image_path = pkg_resources.resource_filename('my_package', path)
-    image = Image.open(image_path)
+        # win32gui.SendMessage(handle,win32con.WM_SYSCOMMAND,win32con.SC_RESTORE,0)
+        #发送还原最小化窗口的信息
+        win32gui.ShowWindow(handle, win32con.SW_SHOWMINIMIZED)
+        win32gui.ShowWindow(handle, win32con.SW_SHOWNORMAL)
+        win32gui.ShowWindow(handle, win32con.SW_SHOW)
+        win32gui.SetWindowPos(handle, win32con.HWND_TOP, pos[0], pos[1], pos[2], pos[3], win32con.SWP_SHOWWINDOW)
+        win32gui.SetForegroundWindow(handle)  # 获取控制
+        sleep(1)
+        # 窗口的标题
+        tit = win32gui.GetWindowText(handle)
+        # 窗口的坐标
+        (x1, y1, x2, y2)=win32gui.GetWindowRect(handle)
+        print('已启动【'+str(tit)+'】窗口')
+        print('-----------------')
 
 if __name__ == '__main__':
     main()

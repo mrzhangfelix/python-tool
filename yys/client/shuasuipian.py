@@ -2,7 +2,7 @@ import time
 
 from pyautogui import FailSafeException
 
-from pyautoguiUtil import resource_path,button,click
+from pyautoguiUtil import resource_path,button,click,find
 from PIL import Image
 
 import constant
@@ -15,6 +15,8 @@ class yaoqi:
 			resource_path(constant.resolution_folder+"img/yaoqi/teamUp.png"))
 		self.jieshouImg = Image.open(
 			resource_path(constant.resolution_folder+"img/yaoqi/接受邀请.png"))
+		self.jujueImg = Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/拒绝邀请.png"))
 		self.quxiaoImg = Image.open(
 			resource_path(constant.resolution_folder+"img/yaoqi/是否邀请.png"))
 		self.yaoqiImg = Image.open(
@@ -25,18 +27,38 @@ class yaoqi:
 			resource_path(constant.resolution_folder+"img/yaoqi/tiaozhan.png"))
 		self.endImg = Image.open(
 			resource_path(constant.resolution_folder+"img/yaoqi/end.png"))
+		self.yaoguaiImg_list = []
+		self.yaoguaiImg_list.append(Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/yaoguai/yaoguai1.png")))
+		self.yaoguaiImg_list.append(Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/yaoguai/yaoguai2.png")))
+		self.yaoguaiImg_list.append(Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/yaoguai/yaoguai3.png")))
+		self.yaoguaiImg_list.append(Image.open(
+			resource_path(constant.resolution_folder+"img/yaoqi/yaoguai/yaoguai4.png")))
 
 		self.jieshouyaoqingzuobiao=(250,350)
 		self.jujueyaoqingzuobiao=(130,350)
+
+   	def is_yaoguai(self):
+		for img in self.yaoguaiImg_list:
+			if find(img):
+				return True
+		return False
+
 
 	#刷碎片用
 	def dowork(self):
 		# 组队
 		if button(self.teamUpImg):
 			time.sleep(0.5)
-		# 接受邀请,总有人御魂邀请，取消这个接受邀请功能
-		# if button(self.jieshouImg,pos):
-		# 	time.sleep(1)
+		# 如果是妖气妖怪就接受邀请
+		if find(self.jieshouImg):
+			if self.is_yaoguai():
+				button(self.jieshouImg)
+			else:
+				button(self.jujueImg)
+			time.sleep(1)
 		# 自己当房主取消邀请其他人
 		if button(self.quxiaoImg):
 			time.sleep(1)
