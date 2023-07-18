@@ -96,7 +96,7 @@ class tansuo:
                             sleep(1)
                             while button(self.shibaiImg):
                                 sleep(1)
-                            self.UI.log.info("失败突破次数")
+                            self.UI.log.info("突破失败")
                             sleep(1)
                             break
                         sleep(5)
@@ -144,6 +144,7 @@ class tansuo:
 
     def buttonshuaxin(self):
         if button(self.shuaxinImg):
+            print("点击刷新")
             self.UI.log.info("刷新")
             sleep(1)
             if button(self.quedingImg):

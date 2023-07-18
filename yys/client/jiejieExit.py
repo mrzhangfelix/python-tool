@@ -43,12 +43,12 @@ class jiejieExit:
 			shibaiCount=0
 			while shibaiCount<exitCount:
 				if UI.event.is_set():
-					UI.log.info("JieJieExit is stopping,shibaicount:" + str(shibaiCount))
+					UI.log.info("结界退出运行中,次数:" + str(shibaiCount))
 					break
 				sleep(1)
 				shibaiCount = self.dowork()
-				UI.log.info("JieJieExit is running,shibaicount:" + str(shibaiCount))
-			UI.log.info("JieJieExit is end,shibaicount:" + str(shibaiCount))
+				UI.log.info("结界退出运行中,次数:{}".format(str(shibaiCount)))
+			UI.log.info("结界退出已停止，次数：{}".format(str(shibaiCount)))
 		except FailSafeException:
 			UI.log.error("程序安全退出")
 			autoAlert("程序安全退出")

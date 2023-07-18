@@ -53,12 +53,11 @@ class jiejie:
 			count=0
 			while True:
 				if UI.event.is_set():
-					UI.log.info("tread is stopping")
 					break
 				count=self.dowork()
 				sleep(1)
-				UI.log.info("jiejie is running,count:" + str(count))
-			UI.log.info("jiejie is end,count:" + str(count))
+				UI.log.info("结界突破运行中,count:" + str(count))
+			UI.log.info("结界突破结束,count:" + str(count))
 		except FailSafeException:
 			UI.log.error("程序安全退出")
 			autoAlert("程序安全退出")

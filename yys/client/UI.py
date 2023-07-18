@@ -34,6 +34,7 @@ class App:
         startTime=time.time()
         # 打开窗口在固定位置
         win32guiUtil.get_window_pos()
+        click= clickService.clickService()
         # daemon 表示 主线程不需要等待子线程结束才能结束，如果daemon等于flase(默认)，那么结束主进程会去等子进程结束
         if startType == 1:
             exitCount=self.entryExitCount.get()
@@ -51,7 +52,6 @@ class App:
             self.threadservice= Thread(name='jiejieThread', target=jiejieService.threadJieJie,
                                        args=(self, int(delay_time)), daemon=True)
         if startType == 3:
-            click= clickService.clickService()
             self.threadservice= Thread(name='clickThread', target=click.threadclick,
                                        args=(self,), daemon=True)
         if startType == 4:
@@ -62,13 +62,16 @@ class App:
             # 挑战次数
             tiaozhanCount=self.entryTiaozhanCount.get()
             if tiaozhanCount == "":
-                self.log.info("输入参数为空,9次")
-                exitCount=9
+                self.log.info("输入参数为空,挑战无上限")
+                tiaozhanCount=9999
             jiejie_swith=self.jiejieCheckbutton.getboolean()
             tansuoService = tansuo.tansuo()
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
                                        args=(self,tiaozhanCount,jiejie_swith), daemon=True)
         self.threadservice.start()
+        jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing(),
+                                   args=(self,), daemon=True)
+        jieshouyaoqing_thread.start()
 
     def end(self):
         self.log.info("服务已停止")
@@ -87,7 +90,7 @@ class App:
         labelJiejieExit = tk.Label(master=frame1, text="结界退出：",background="red")
         labelExitCount = tk.Label(master=frame1, text="退出次数")
         self.entryExitCount = tk.Entry(master=frame1, width=20)
-        startBtn = tk.Button(master=frame1, text="start jiejie Exit", width=20, command=lambda: self.start(1))
+        startBtn = tk.Button(master=frame1, text="开始结界退出", width=20, command=lambda: self.start(1))
 
         labelJiejieExit.pack(side=tk.LEFT)
         labelExitCount.pack(side=tk.LEFT)
