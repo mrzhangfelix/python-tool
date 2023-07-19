@@ -1,11 +1,12 @@
 import sys
-from time import sleep
+from time import sleep, time
 from PIL import Image
 from pyautogui import FailSafeException
 import constant
 
 sys.path.append("")
 from pyautoguiUtil import resource_path, button, autoAlert
+from pymysqlUtil import execute_sql, update_st_sql,update_data_sql
 
 
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
@@ -22,6 +23,7 @@ class jiejie:
 			constant.resolution_folder+"/jiejie/end.png"))
 		self.shibaiImg = Image.open(resource_path(
 			constant.resolution_folder+"/jiejie/shibai.png"))
+		execute_sql(update_st_sql(time()))
 
 	def dowork(self):
 		if button(self.noattackImg):
@@ -34,7 +36,8 @@ class jiejie:
 			while button(self.endImg):
 				sleep(1)
 			print('点击end按钮')
-			self.count= self.count + 1
+			self.count+=1
+			update_data_sql(1,time(),self.count,'running')
 			print("chengong count:{}".format(self.count))
 			sleep(1)
 		if button(self.shibaiImg):
@@ -61,6 +64,8 @@ class jiejie:
 		except FailSafeException:
 			UI.log.error("程序安全退出")
 			autoAlert("程序安全退出")
+		finally:
+			update_data_sql(1,time(),self.count,'ended')
 
 if __name__ == '__main__':
 	jiejie=jiejie()
