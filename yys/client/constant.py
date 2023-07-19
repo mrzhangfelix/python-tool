@@ -4,9 +4,10 @@ resolution_y=720
 ready_x=1100
 ready_y=535
 
-host="140.246.105.238"
+# host="140.246.105.238"
+host="logs.lamp.run"
 user="root"
-password="zhixin"
+password="mmit7750"
 database="dev"
 port=3306
 

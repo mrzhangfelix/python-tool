@@ -64,10 +64,9 @@ class App:
             if tiaozhanCount == "":
                 self.log.info("输入参数为空,挑战无上限")
                 tiaozhanCount=9999
-            jiejie_swith=self.jiejieCheckbutton.getboolean()
             tansuoService = tansuo.tansuo()
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
-                                       args=(self,tiaozhanCount,jiejie_swith), daemon=True)
+                                       args=(self,tiaozhanCount,self.jiejieCheckbuttonVar), daemon=True)
         self.threadservice.start()
         jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing,
                                    args=(self,), daemon=True)
@@ -137,7 +136,11 @@ class App:
         tiaozhanCount.pack(side=tk.LEFT)
         self.entryTiaozhanCount = tk.Entry(master=frame5, width=20)
         self.entryTiaozhanCount.pack(side=tk.LEFT)
-        self.jiejieCheckbutton= tk.Checkbutton(master=frame5, text='是否打结界')#创建复选框
+        self.jiejieCheckbuttonVar=tk.BooleanVar()
+        self.jiejieCheckbutton= tk.Checkbutton(master=frame5,
+                                               variable=self.jiejieCheckbuttonVar,
+                                               onvalue=True,
+                                               offvalue=False,text='是否打结界')#创建复选框
         self.jiejieCheckbutton.pack(side=tk.LEFT)
         startBtn5 = tk.Button(master=frame5, text="开始刷绘卷", width=20,command=lambda: self.start(5))
         startBtn5.pack(side=tk.LEFT)

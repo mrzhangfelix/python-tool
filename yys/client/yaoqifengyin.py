@@ -6,7 +6,7 @@ from pyautoguiUtil import resource_path, button, click, find, autoAlert
 from PIL import Image
 
 import constant
-from pymysqlUtil import execute_sql,update_st_sql,update_data_sql
+from pymysqlUtil import execute_sql,update_st,update_data
 
 
 class yaoqi:
@@ -43,7 +43,7 @@ class yaoqi:
             resource_path(constant.resolution_folder + "\\yaoqi\\yaoguai\\跳跳哥哥.png")))
         self.yaoguaiImg_list.append(Image.open(
             resource_path(constant.resolution_folder + "\\yaoqi\\yaoguai\\鬼使黑.png")))
-        execute_sql(update_st_sql(3))
+        update_st(3)
 
         self.jieshouyaoqingzuobiao = (250, 350)
         self.jujueyaoqingzuobiao = (130, 350)
@@ -81,7 +81,7 @@ class yaoqi:
             while button(self.endImg):
                 time.sleep(1)
             self.count += 1
-            update_data_sql(3,self.count,'running')
+            update_data(3,self.count,'running')
             print("次数:{}".format(self.count))
             time.sleep(1)
             return self.count
@@ -104,7 +104,7 @@ class yaoqi:
             UI.log.error("程序安全退出")
             autoAlert("程序安全退出")
         finally:
-            update_data_sql(3,self.count,'ended')
+            update_data(3,self.count,'ended')
 
 
 if __name__ == '__main__':

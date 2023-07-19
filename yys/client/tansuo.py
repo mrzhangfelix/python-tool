@@ -5,7 +5,7 @@ from pyautogui import FailSafeException
 
 from pyautoguiUtil import button, find, click, resource_path, autoAlert
 import constant
-from pymysqlUtil import execute_sql, update_st_sql,update_data_sql
+from pymysqlUtil import update_st,update_data
 
 
 class tansuo:
@@ -21,11 +21,11 @@ class tansuo:
         self.jieshuImg = Image.open(resource_path(
             constant.resolution_folder + "/tansuo/结束探索.png"))
         self.jieshouImg = Image.open(resource_path(
-            constant.resolution_folder + "/接受.png"))
+            constant.resolution_folder + "/接受协作邀请.png"))
         self.huijuanzhongImg = Image.open(resource_path(
             constant.resolution_folder + "/绘卷中.png"))
 
-        self.attackImg = Image.open(resource_path(
+        self.jingongImg = Image.open(resource_path(
             constant.resolution_folder + "/jiejie/attack.png"))
         self.noattackImg = Image.open(resource_path(
             constant.resolution_folder + "/jiejie/medal.png"))
@@ -50,13 +50,13 @@ class tansuo:
         self.tiaozhanTotalCount = 0
 
         self.UI = None
-        execute_sql(update_st_sql(2))
+        update_st(2)
 
     def print_tansuo_status(self):
-        msg = "探索总数：{},探索轮数：{}，结界数：{}，绘卷中数：{}".format(
+        msg = "探索:{},轮:{}，结界:{}，绘卷中:{}".format(
             self.tansuoTotalCount, self.tansuoLeaderCount, self.tiaozhanTotalCount, self.huijuanzhongCount)
         print(msg)
-        update_data_sql(2,self.tansuoTotalCount,msg)
+        update_data(2,self.tansuoTotalCount,msg)
         self.UI.log.info(msg)
 
     def doJiejie(self):
@@ -69,10 +69,10 @@ class tansuo:
             if button(self.noattackImg):
                 # logger.info("第{}次选择挑战".format(tiaozhancount))
                 sleep(1)
-                if button(self.attackImg):
+                if button(self.jingongImg):
                     # logger.info("开始第{}次进攻".format(tiaozhancount))
                     sleep(2)
-                    if find(self.attackImg):
+                    if find(self.jingongImg):
                         # logger.info("挑战券数量为0")
                         while button(self.guanbiImg):
                             # logger.info("第{}次，挑战结束关闭".format(tiaozhancount))
@@ -170,7 +170,7 @@ class tansuo:
                     break
                 if self.tiaozhanTotalCount > tiaozhanCount:
                     break
-                if jiejie_swith:
+                if jiejie_swith.get():
                     self.doJiejie()
                 self.doTansou(50)
         except FailSafeException:

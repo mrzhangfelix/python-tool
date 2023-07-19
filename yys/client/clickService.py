@@ -4,7 +4,7 @@ from PIL import Image
 
 import pyautogui
 
-from pyautoguiUtil import autoAlert, click, resource_path, button
+from pyautoguiUtil import autoAlert, click, resource_path, button,find
 import constant
 
 
@@ -36,6 +36,32 @@ class clickService:
             UI.log.error("程序安全退出")
             autoAlert("程序安全退出")
 
+    def threadqiling(self):
+        qilingCount=0
+        qilingShibaiCount=0
+        zhenhunshouImg = Image.open(resource_path(
+            constant.resolution_folder + "/qiling/zhenhunshou.png"))
+        tiaozhanImg = Image.open(resource_path(
+            constant.resolution_folder + "/qiling/tiaozhan.png"))
+        endImg = Image.open(resource_path(
+            constant.resolution_folder + "/end.png"))
+        shibaiImg = Image.open(resource_path(
+            constant.resolution_folder + "/shibai.png"))
+        try:
+            while True:
+                if find(zhenhunshouImg):
+                    button(tiaozhanImg)
+                if button(endImg):
+                    qilingCount+=1
+                    print("chenggong:{}".format(qilingCount))
+                if button(shibaiImg):
+                    qilingShibaiCount+=1
+                    print("shibai:{}".format(qilingShibaiCount))
+                time.sleep(1)
+        except pyautogui.FailSafeException:
+            autoAlert("程序安全退出")
+
 
 if __name__ == '__main__':
     clickService=clickService()
+    clickService.threadqiling()
