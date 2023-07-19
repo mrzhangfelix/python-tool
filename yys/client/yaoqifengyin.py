@@ -43,7 +43,7 @@ class yaoqi:
             resource_path(constant.resolution_folder + "\\yaoqi\\yaoguai\\跳跳哥哥.png")))
         self.yaoguaiImg_list.append(Image.open(
             resource_path(constant.resolution_folder + "\\yaoqi\\yaoguai\\鬼使黑.png")))
-        execute_sql(update_st_sql(2))
+        execute_sql(update_st_sql(3))
 
         self.jieshouyaoqingzuobiao = (250, 350)
         self.jujueyaoqingzuobiao = (130, 350)
