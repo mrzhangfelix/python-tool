@@ -16,11 +16,11 @@ def execute_sql(sql):
     cursor.close()
     conn.close()
 
-def update_data_sql(id,ut,count,remark):
+def update_data_sql(id,count,remark):
     #"UPDATE yyslog SET ut = '2023-01-30 12:34:56',COUNT=3,remark='' WHERE id=3"
-    utStr=time.strptime(ut,'%Y-%m-%d %H:%M:%S')
+    utStr=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
     return "UPDATE yyslog SET ut = {},COUNT={},remark={} WHERE id={}".format(utStr,count,remark,id)
 
-def update_st_sql(id,st):
-    stStr=time.strptime(st,'%Y-%m-%d %H:%M:%S')
+def update_st_sql(id):
+    stStr=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
     return "UPDATE yyslog SET st = {}WHERE id={}".format(stStr,id)

@@ -50,13 +50,13 @@ class tansuo:
         self.tiaozhanTotalCount = 0
 
         self.UI = None
-        execute_sql(update_st_sql(time.time()))
+        execute_sql(update_st_sql(2))
 
     def print_tansuo_status(self):
         msg = "探索总数：{},探索轮数：{}，结界数：{}，绘卷中数：{}".format(
             self.tansuoTotalCount, self.tansuoLeaderCount, self.tiaozhanTotalCount, self.huijuanzhongCount)
         print(msg)
-        update_data_sql(2,time.time(),self.tansuoTotalCount,msg)
+        update_data_sql(2,self.tansuoTotalCount,msg)
         self.UI.log.info(msg)
 
     def doJiejie(self):

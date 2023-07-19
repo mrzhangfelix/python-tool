@@ -23,7 +23,7 @@ class jiejie:
 			constant.resolution_folder+"/jiejie/end.png"))
 		self.shibaiImg = Image.open(resource_path(
 			constant.resolution_folder+"/jiejie/shibai.png"))
-		execute_sql(update_st_sql(time()))
+		execute_sql(update_st_sql(1))
 
 	def dowork(self):
 		if button(self.noattackImg):
@@ -37,7 +37,7 @@ class jiejie:
 				sleep(1)
 			print('点击end按钮')
 			self.count+=1
-			update_data_sql(1,time(),self.count,'running')
+			update_data_sql(1,self.count,'running')
 			print("chengong count:{}".format(self.count))
 			sleep(1)
 		if button(self.shibaiImg):
@@ -65,7 +65,7 @@ class jiejie:
 			UI.log.error("程序安全退出")
 			autoAlert("程序安全退出")
 		finally:
-			update_data_sql(1,time(),self.count,'ended')
+			update_data_sql(1,self.count,'ended')
 
 if __name__ == '__main__':
 	jiejie=jiejie()
