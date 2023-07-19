@@ -69,7 +69,7 @@ class App:
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
                                        args=(self,tiaozhanCount,jiejie_swith), daemon=True)
         self.threadservice.start()
-        jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing(),
+        jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing,
                                    args=(self,), daemon=True)
         jieshouyaoqing_thread.start()
 
