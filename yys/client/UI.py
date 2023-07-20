@@ -29,8 +29,6 @@ class TextboxHander(logging.Handler):
 
 class App:
     def start(self, startType):
-        if self.threadservice.is_alive() or self.jieshouyaoqing_thread.is_alive():
-            self.log.info("当前线程还没有结束，请不要重复开启")
         self.event.clear()
         global startTime
         startTime=time.time()
@@ -69,9 +67,11 @@ class App:
             tansuoService = tansuo.tansuo()
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
                                        args=(self,tiaozhanCount,self.jiejieCheckbuttonVar), daemon=True)
-        self.threadservice.start()
         self.jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing,
                                    args=(self,), daemon=True)
+        if self.threadservice.is_alive() or self.jieshouyaoqing_thread.is_alive():
+            self.log.info("当前线程还没有结束，请不要重复开启")
+        self.threadservice.start()
         self.jieshouyaoqing_thread.start()
 
     def end(self):

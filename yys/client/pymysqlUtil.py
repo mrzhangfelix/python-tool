@@ -23,7 +23,7 @@ def update_data(id,count,remark):
     #"UPDATE yyslog SET ut = '2023-01-30 12:34:56',COUNT=3,remark='' WHERE id=3"
     global utStr
     utStr=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
-    sql="UPDATE yyslog SET ut = '{}',COUNT={},remark='{}',duration={} WHERE id={}".format(utStr,count,remark,get_duration(),id)
+    sql="UPDATE yyslog SET ut = '{}',COUNT={},remark='{}',duration='{}' WHERE id={}".format(utStr,count,remark,get_duration(),id)
     execute_sql(sql)
 
 def update_st(id):
