@@ -5,7 +5,7 @@ from pyautogui import FailSafeException
 
 from pyautoguiUtil import button, find, click, resource_path, autoAlert
 import constant
-from pymysqlUtil import update_st,update_data
+from pymysqlUtil import update_st, update_data
 
 
 class tansuo:
@@ -52,11 +52,13 @@ class tansuo:
         self.UI = None
         update_st(2)
 
-    def print_tansuo_status(self):
-        msg = "探索:{},轮:{}，结界:{}，绘卷中:{}".format(
-            self.tansuoTotalCount, self.tansuoLeaderCount, self.tiaozhanTotalCount, self.huijuanzhongCount)
+    def print_tansuo_status(self, type):
+        msg = "正在{},探索:{},轮:{}，结界:{}，绘卷中:{}".format(type,
+                                                              self.tansuoTotalCount, self.tansuoLeaderCount,
+                                                              self.tiaozhanTotalCount, self.huijuanzhongCount)
         print(msg)
-        update_data(2,self.tansuoTotalCount,msg)
+        remark="正在{},结界:{}，绘卷中:{}".format(type,self.tiaozhanTotalCount, self.huijuanzhongCount)
+        update_data(2, self.tansuoTotalCount, remark)
         self.UI.log.info(msg)
 
     def doJiejie(self):
@@ -84,7 +86,6 @@ class tansuo:
                             break
                         if find(self.huijuanzhongImg):
                             self.huijuanzhongCount += 1
-                            self.print_tansuo_status()
                         if button(self.endImg):
                             # logger.info("第{}次，挑战成功".format(tiaozhancount))
                             sleep(1)
@@ -92,7 +93,7 @@ class tansuo:
                                 # logger.info("第{}次，挑战成功".format(tiaozhancount))
                                 sleep(1)
                             self.tiaozhanTotalCount += 1
-                            self.print_tansuo_status()
+                            self.print_tansuo_status("结界")
                             sleep(1)
                             break
                         if button(self.shibaiImg):
@@ -117,14 +118,14 @@ class tansuo:
             if button(self.attackLeaderImg):
                 self.tansuoTotalCount += 1
                 self.tansuoLeaderCount += 1
-                self.print_tansuo_status()
+                self.print_tansuo_status("探索")
                 attackCount += 1
                 time.sleep(5)
                 continue
             if button(self.attackImg):
                 # logger.info("attack次数:" + str(attackCount))
                 self.tansuoTotalCount += 1
-                self.print_tansuo_status()
+                self.print_tansuo_status("探索")
                 attackCount += 1
                 time.sleep(5)
                 continue
@@ -140,7 +141,6 @@ class tansuo:
                 continue
             if find(self.huijuanzhongImg):
                 self.huijuanzhongCount += 1
-                self.print_tansuo_status()
             # X: 2196 , Y:  809
             click()
             time.sleep(2)
