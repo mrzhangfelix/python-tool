@@ -62,7 +62,8 @@ class tansuo:
                                                               self.tansuoTotalCount, self.tansuoLeaderCount,
                                                               self.tiaozhanTotalCount, self.huijuanzhongCount)
         print(msg)
-        remark="正在{},结界:{}，绘卷中:{}".format(type,self.tiaozhanTotalCount, self.huijuanzhongCount)
+        remark="正在{},结界:{}，绘卷:{}-{}-{}".format(
+            type,self.tiaozhanTotalCount, self.huijuanxiaoCount, self.huijuanzhongCount, self.huijuandaCount)
         update_data(2, self.tansuoTotalCount, remark)
         self.UI.log.info(msg)
 
