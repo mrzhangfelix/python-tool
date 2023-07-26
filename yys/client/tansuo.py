@@ -22,8 +22,6 @@ class tansuo:
             constant.resolution_folder + "/tansuo/结束探索.png"))
         self.jieshouImg = Image.open(resource_path(
             constant.resolution_folder + "/接受协作邀请.png"))
-        self.huijuanzhongImg = Image.open(resource_path(
-            constant.resolution_folder + "/绘卷中.png"))
 
         self.jingongImg = Image.open(resource_path(
             constant.resolution_folder + "/jiejie/attack.png"))
@@ -41,12 +39,19 @@ class tansuo:
             constant.resolution_folder + "/jiejie/刷新.png"))
         self.quedingImg = Image.open(resource_path(
             constant.resolution_folder + "/jiejie/确定退出.png"))
+
+        self.huijuanxiaoImg = Image.open(resource_path(
+            constant.resolution_folder + "/绘卷小.png"))
         self.huijuanzhongImg = Image.open(resource_path(
             constant.resolution_folder + "/绘卷中.png"))
+        self.huijuandaImg = Image.open(resource_path(
+            constant.resolution_folder + "/绘卷大.png"))
 
         self.tansuoTotalCount = 0
         self.tansuoLeaderCount = 0
+        self.huijuanxiaoCount = 0
         self.huijuanzhongCount = 0
+        self.huijuandaCount = 0
         self.tiaozhanTotalCount = 0
 
         self.UI = None
@@ -84,8 +89,12 @@ class tansuo:
                     while True:
                         if self.UI.event.is_set():
                             break
+                        if find(self.huijuanxiaoImg):
+                            self.huijuanxiaoCount += 1
                         if find(self.huijuanzhongImg):
                             self.huijuanzhongCount += 1
+                        if find(self.huijuandaImg):
+                            self.huijuandaCount += 1
                         if button(self.endImg):
                             # logger.info("第{}次，挑战成功".format(tiaozhancount))
                             sleep(1)
@@ -139,8 +148,12 @@ class tansuo:
             if button(self.exploreImg):
                 time.sleep(2)
                 continue
+            if find(self.huijuanxiaoImg):
+                self.huijuanxiaoCount += 1
             if find(self.huijuanzhongImg):
                 self.huijuanzhongCount += 1
+            if find(self.huijuandaImg):
+                self.huijuandaCount += 1
             # X: 2196 , Y:  809
             click()
             time.sleep(2)
