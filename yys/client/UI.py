@@ -162,6 +162,18 @@ class App:
         self.log.setLevel(logging.INFO)
         handler = TextboxHander(logText)
         self.log.addHandler(handler)
+        LOG_FILE = 'mylog.log'
+        file_handler = logging.FileHandler(LOG_FILE) #输出到文件
+        console_handler = logging.StreamHandler()  #输出到控制台
+        file_handler.setLevel('INFO')     #error以上才输出到文件
+        console_handler.setLevel('INFO')   #info以上才输出到控制台
+        fmt = '%(asctime)s - %(funcName)s - %(lineno)s - %(levelname)s - %(message)s'
+        formatter = logging.Formatter(fmt)
+        file_handler.setFormatter(formatter) #设置输出内容的格式
+        console_handler.setFormatter(formatter)
+
+        self.log.addHandler(file_handler)    #添加handler
+        self.log.addHandler(console_handler)
 
         #结束按钮
         rowNum+=1

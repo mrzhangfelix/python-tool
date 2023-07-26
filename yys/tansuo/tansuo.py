@@ -22,6 +22,7 @@ logger = logging.getLogger('updateSecurity')
 logger.setLevel('INFO')     #设置了这个才会把debug以上的输出到控制台
 logger.addHandler(file_handler)    #添加handler
 logger.addHandler(console_handler)
+
 jieshouImg = Image.open("接受.png")
 huijuanzhongImg = Image.open("绘卷中.png")
 
