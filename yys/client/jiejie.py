@@ -23,6 +23,8 @@ class jiejie:
 			constant.resolution_folder+"/jiejie/end.png"))
 		self.shibaiImg = Image.open(resource_path(
 			constant.resolution_folder+"/jiejie/shibai.png"))
+		self.yinyangliaoImg = Image.open(resource_path(
+			constant.resolution_folder+"/jiejie/yinyangliao.png"))
 		update_st(1)
 
 	def dowork(self):
@@ -32,6 +34,7 @@ class jiejie:
 			if button(self.attackImg):
 				print('点击attack按钮')
 				sleep(5)
+				button(self.yinyangliaoImg)
 		if button(self.endImg):
 			while button(self.endImg):
 				sleep(1)
