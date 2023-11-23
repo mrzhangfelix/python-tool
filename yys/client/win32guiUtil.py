@@ -5,7 +5,7 @@ import constant
 
 
 def get_window_pos():
-    name="阴阳师 - MuMu模拟器"
+    name="MuMu模拟器12"
     pos=(0,0,constant.resolution_x,constant.resolution_y)
     handle = win32gui.FindWindow(0, name)
     # 获取窗口句柄

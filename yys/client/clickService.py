@@ -4,7 +4,7 @@ from PIL import Image
 
 import pyautogui
 
-from pyautoguiUtil import autoAlert, click, resource_path, button,find
+from pyautoguiUtil import autoAlert, click, resource_path, button, find, clickPos
 import constant
 
 
@@ -13,8 +13,7 @@ class clickService:
         self.jieshouImg = Image.open(resource_path(
             constant.resolution_folder + "/接受协作邀请.png"))
 
-
-    def jieshouyaoqing(self,UI):
+    def jieshouyaoqing(self, UI):
         while True:
             if UI.event.is_set():
                 UI.log.info("接受邀请现场停止")
@@ -23,12 +22,25 @@ class clickService:
                 UI.log.error("接受悬赏邀请")
             sleep(5)
 
-    def threadclick(self,UI):
+    def threadclick(self, UI, x, y):
         try:
             while True:
                 if UI.event.is_set():
                     break
-                click()
+                clickPos(x, y)
+                time.sleep(1)
+                UI.log.info("连续点击线程运行中")
+            UI.log.info("连续点击线程停止")
+        except pyautogui.FailSafeException:
+            UI.log.error("程序安全退出")
+            autoAlert("程序安全退出")
+
+    def threadMouseClick(self, UI):
+        try:
+            while True:
+                if UI.event.is_set():
+                    break
+                pyautogui.click()
                 time.sleep(1)
                 UI.log.info("连续点击线程运行中")
             UI.log.info("连续点击线程停止")
@@ -37,8 +49,8 @@ class clickService:
             autoAlert("程序安全退出")
 
     def threadqiling(self):
-        qilingCount=0
-        qilingShibaiCount=0
+        qilingCount = 0
+        qilingShibaiCount = 0
         zhenhunshouImg = Image.open(resource_path(
             constant.resolution_folder + "/qiling/zhenhunshou.png"))
         tiaozhanImg = Image.open(resource_path(
@@ -52,10 +64,10 @@ class clickService:
                 if find(zhenhunshouImg):
                     button(tiaozhanImg)
                 if button(endImg):
-                    qilingCount+=1
+                    qilingCount += 1
                     print("chenggong:{}".format(qilingCount))
                 if button(shibaiImg):
-                    qilingShibaiCount+=1
+                    qilingShibaiCount += 1
                     print("shibai:{}".format(qilingShibaiCount))
                 time.sleep(1)
         except pyautogui.FailSafeException:
@@ -63,5 +75,5 @@ class clickService:
 
 
 if __name__ == '__main__':
-    clickService=clickService()
+    clickService = clickService()
     clickService.threadqiling()

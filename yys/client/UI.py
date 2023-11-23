@@ -52,7 +52,12 @@ class App:
             self.threadservice= Thread(name='jiejieThread', target=jiejieService.threadJieJie,
                                        args=(self, int(delay_time)), daemon=True)
         if startType == 3:
+            x = self.posX.get()
+            y = self.posY.get()
             self.threadservice= Thread(name='clickThread', target=click.threadclick,
+                                       args=(self,int(x),int(y)), daemon=True)
+        if startType == 31:
+            self.threadservice= Thread(name='clickThread', target=click.threadMouseClick,
                                        args=(self,), daemon=True)
         if startType == 4:
             suipianService = yaoqifengyin.yaoqi()
@@ -119,9 +124,13 @@ class App:
         rowNum+=1
         frame3 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame3.grid(row=rowNum, column=0)
+        self.posX = tk.Entry(master=frame3, width=10,textvariable= tk.IntVar(value=1150))
+        self.posY = tk.Entry(master=frame3, width=10,textvariable= tk.IntVar(value=580))
+        self.posX.pack(side=tk.LEFT)
+        self.posY.pack(side=tk.LEFT)
 
-        startBtn2 = tk.Button(master=frame3, text="开始连续点击", width=20,command=lambda: self.start(3))
-        startBtn2.pack(side=tk.LEFT)
+        tk.Button(master=frame3, text="点击固定位置", width=20,command=lambda: self.start(3)).pack(side=tk.LEFT)
+        tk.Button(master=frame3, text="点击鼠标位置", width=20,command=lambda: self.start(31)).pack(side=tk.LEFT)
 
         # 刷碎片功能
         rowNum+=1

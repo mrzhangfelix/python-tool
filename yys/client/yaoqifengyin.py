@@ -6,7 +6,7 @@ from pyautoguiUtil import resource_path, button, click, find, autoAlert
 from PIL import Image
 
 import constant
-from pymysqlUtil import execute_sql,update_st,update_data
+from pymysqlUtil import update_st,update_data
 
 
 class yaoqi:
