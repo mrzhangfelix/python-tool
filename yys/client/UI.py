@@ -72,6 +72,12 @@ class App:
             tansuoService = tansuo.tansuo()
             self.threadservice= Thread(name='threadHuijuan', target=tansuoService.threadHuijuan,
                                        args=(self,tiaozhanCount,self.jiejieCheckbuttonVar), daemon=True)
+
+        if startType == 6:
+            suipianService = yaoqifengyin.douji()
+            self.threadservice= Thread(name='threaddouji', target=suipianService.threadSuipian,
+                                       args=(self,), daemon=True)
+
         self.jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing,
                                    args=(self,), daemon=True)
         if self.threadservice.is_alive() or self.jieshouyaoqing_thread.is_alive():
@@ -140,7 +146,9 @@ class App:
         startBtn4 = tk.Button(master=frame4, text="开始刷碎片", width=20,command=lambda: self.start(4))
         startBtn4.pack(side=tk.LEFT)
 
-        # 刷碎片功能
+
+
+        # 刷绘卷功能
         rowNum+=1
         frame5 = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
         frame5.grid(row=rowNum, column=0)
@@ -157,6 +165,14 @@ class App:
         self.jiejieCheckbutton.pack(side=tk.LEFT)
         startBtn5 = tk.Button(master=frame5, text="开始刷绘卷", width=20,command=lambda: self.start(5))
         startBtn5.pack(side=tk.LEFT)
+
+        # 斗鸡功能
+        rowNum += 1
+        framedouji = tk.Frame(master=window, relief=tk.RAISED, borderwidth=1)
+        framedouji.grid(row=rowNum, column=0)
+
+        startBtndouji = tk.Button(master=framedouji, text="开始斗鸡", width=20, command=lambda: self.start(6))
+        startBtndouji.pack(side=tk.LEFT)
 
         # 日志显示
         rowNum+=1
