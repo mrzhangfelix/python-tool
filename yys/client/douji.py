@@ -9,7 +9,7 @@ import constant
 from pymysqlUtil import update_st,update_data
 
 
-class yaoqi:
+class douji:
     def __init__(self):
         self.chenggongcount = 0
         self.shibaicount = 0
@@ -39,15 +39,16 @@ class yaoqi:
             time.sleep(10)
         # 成功
         if button(self.chenggongImg):
+            self.chenggongcount+=1
             time.sleep(2)
         # 失败
         if button(self.shibaiImg):
+            self.shibaicount+=1
             time.sleep(2)
-        click()
-        time.sleep(10)
+        time.sleep(5)
         return self.chenggongcount,self.shibaicount,self.totalcount
 
-    def threadSuipian(self, UI):
+    def threaddouji(self, UI):
         try:
             count = 0
             while True:
@@ -67,6 +68,6 @@ class yaoqi:
 
 
 if __name__ == '__main__':
-    yaoqiservice = yaoqi()
+    doujiservice = douji()
     while True:
-        yaoqiservice.dowork()
+        doujiservice.dowork()

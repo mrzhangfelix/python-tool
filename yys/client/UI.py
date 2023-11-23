@@ -12,6 +12,7 @@ import jiejieExit
 import tansuo
 import win32guiUtil
 import yaoqifengyin
+import douji
 
 startTime=time.time()
 # 日志处理的类
@@ -74,8 +75,8 @@ class App:
                                        args=(self,tiaozhanCount,self.jiejieCheckbuttonVar), daemon=True)
 
         if startType == 6:
-            suipianService = yaoqifengyin.douji()
-            self.threadservice= Thread(name='threaddouji', target=suipianService.threadSuipian,
+            doujiService = douji.douji()
+            self.threadservice= Thread(name='threaddouji', target=doujiService.threaddouji,
                                        args=(self,), daemon=True)
 
         self.jieshouyaoqing_thread= Thread(name='jieshouyaoqing_thread', target=click.jieshouyaoqing,
