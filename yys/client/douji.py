@@ -2,7 +2,7 @@ import time
 
 from pyautogui import FailSafeException
 
-from pyautoguiUtil import resource_path, button, click, find, autoAlert
+from pyautoguiUtil import resource_path, button, click, find, autoAlert, clickPos
 from PIL import Image
 
 import constant
@@ -24,6 +24,8 @@ class douji:
             resource_path(constant.resolution_folder + "\\douji\\chenggong.png"))
         self.shibaiImg = Image.open(
             resource_path(constant.resolution_folder + "\\douji\\shibai.png"))
+        self.biaojiImg = Image.open(
+            resource_path(constant.resolution_folder + "\\douji\\biaoji.png"))
 
     # 刷碎片用
     def dowork(self):
@@ -36,6 +38,9 @@ class douji:
             time.sleep(2)
         # 手动
         if button(self.shoudongImg):
+            time.sleep(2)
+            if not find(self.biaojiImg):
+                clickPos(100,100)
             time.sleep(10)
         # 成功
         if button(self.chenggongImg):
