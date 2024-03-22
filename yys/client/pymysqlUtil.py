@@ -7,17 +7,18 @@ import pymysql
 stStr=''
 utStr=''
 def execute_sql(sql):
-    conn = pymysql.connect(host=constant.host,
-                           user=constant.user,
-                           password=constant.password,
-                           database=constant.database,
-                           port=constant.port)
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    conn.commit()
-    cursor.close()
-    conn.close()
+    pass
+    # conn = pymysql.connect(host=constant.host,
+    #                        user=constant.user,
+    #                        password=constant.password,
+    #                        database=constant.database,
+    #                        port=constant.port)
+    # cursor = conn.cursor()
+    # cursor.execute(sql)
+    # result = cursor.fetchall()
+    # conn.commit()
+    # cursor.close()
+    # conn.close()
 
 def update_data(id,count,remark):
     #"UPDATE yyslog SET ut = '2023-01-30 12:34:56',COUNT=3,remark='' WHERE id=3"

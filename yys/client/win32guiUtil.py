@@ -1,12 +1,12 @@
-import win32api,win32con,win32gui
+import win32api, win32con, win32gui
 import time
 
 import constant
 
 
 def get_window_pos():
-    name="MuMu模拟器12"
-    pos=(0,0,constant.resolution_x,constant.resolution_y)
+    name = "MuMu模拟器12"
+    pos = (0, 0, constant.resolution_x, constant.resolution_y)
     handle = win32gui.FindWindow(0, name)
     # 获取窗口句柄
     if handle == 0:
@@ -14,7 +14,7 @@ def get_window_pos():
         exit()
     else:
         # win32gui.SendMessage(handle,win32con.WM_SYSCOMMAND,win32con.SC_RESTORE,0)
-        #发送还原最小化窗口的信息
+        # 发送还原最小化窗口的信息
         win32gui.ShowWindow(handle, win32con.SW_SHOWMINIMIZED)
         win32gui.ShowWindow(handle, win32con.SW_SHOWNORMAL)
         win32gui.ShowWindow(handle, win32con.SW_SHOW)
@@ -24,6 +24,7 @@ def get_window_pos():
         # 窗口的标题
         tit = win32gui.GetWindowText(handle)
         # 窗口的坐标
-        (x1, y1, x2, y2)=win32gui.GetWindowRect(handle)
-        print('已启动【'+str(tit)+'】窗口')
+        (x1, y1, x2, y2) = win32gui.GetWindowRect(handle)
+        print('已启动【' + str(tit) + '】窗口')
         print('-----------------')
+
