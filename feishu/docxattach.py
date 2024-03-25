@@ -40,12 +40,10 @@ def save_attachments_from_docx(docx_path, output_dir):
         elif rel.reltype.endswith('oleObject'):
             attachment_part = rel.target_part
             attachment_data = attachment_part.blob
-            filename = os.path.basename(rel.target_ref)
+            filename = os.path.basename(rel.target_ref).replace(".bin", ".xlsx")
             with open(os.path.join(output_dir, filename), 'wb') as f:
                 f.write(attachment_data)
                 print(f"Saved attachment: {filename}")
-
-            # 使用示例
 
 
 docx_file_path = 'result.docx'  # 替换为你的 .docx 文件路径
