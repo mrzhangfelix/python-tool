@@ -37,6 +37,13 @@ def save_attachments_from_docx(docx_path, output_dir):
             with open(os.path.join(output_dir, filename), 'wb') as f:
                 f.write(attachment_data)
                 print(f"Saved attachment: {filename}")
+        elif rel.reltype.endswith('oleObject'):
+            attachment_part = rel.target_part
+            attachment_data = attachment_part.blob
+            filename = os.path.basename(rel.target_ref)
+            with open(os.path.join(output_dir, filename), 'wb') as f:
+                f.write(attachment_data)
+                print(f"Saved attachment: {filename}")
 
             # 使用示例
 
