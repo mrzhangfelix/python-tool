@@ -40,7 +40,7 @@ class douji:
         if button(self.shoudongImg):
             time.sleep(2)
             if not find(self.biaojiImg):
-                clickPos(100,100)
+                clickPos(1000,500)
             time.sleep(10)
         # 成功
         if button(self.chenggongImg):

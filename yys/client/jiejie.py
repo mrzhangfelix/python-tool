@@ -12,6 +12,8 @@ from pymysqlUtil import update_st,update_data
 # pyinstaller -F tansuo.py --path="C:\Users\felix\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2"
 class jiejie:
 	def __init__(self):
+		# print(resource_path(
+		# 	constant.resolution_folder+"/jiejie/medal.png"))
 		self.count=0
 		self.shibaicount=0
 		# 打开窗口在固定位置

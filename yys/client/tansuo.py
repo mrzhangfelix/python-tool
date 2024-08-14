@@ -58,9 +58,10 @@ class tansuo:
         update_st(2)
 
     def print_tansuo_status(self, type):
-        msg = "正在{},探索:{},轮:{}，结界:{}，绘卷中:{}".format(type,
+        msg = "正在{},探索:{},轮:{}，结界:{}，绘卷:{}-{}".format(type,
                                                               self.tansuoTotalCount, self.tansuoLeaderCount,
-                                                              self.tiaozhanTotalCount, self.huijuanzhongCount)
+                                                              self.tiaozhanTotalCount,
+                                                      self.huijuanxiaoCount,self.huijuanzhongCount)
         print(msg)
         remark="正在{},结界:{}，绘卷:{}-{}-{}".format(
             type,self.tiaozhanTotalCount, self.huijuanxiaoCount, self.huijuanzhongCount, self.huijuandaCount)

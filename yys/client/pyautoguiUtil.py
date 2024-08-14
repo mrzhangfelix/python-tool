@@ -13,15 +13,25 @@ def resource_path(relative_path):
 
 
 def buttonWithPos(Img, pos):
-    msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True, region=pos)
-    if msg == None:
-        return False
-    else:
+    try:
+        msg = pyautogui.locateOnScreen(Img, confidence=0.9, grayscale=True, region=pos)
+        if msg == None:
+            return False
         x, y, width, height = msg
         # print("X={},Y={}，宽{}像素,高{}像素".format(x, y, width, height))
         center = pyautogui.center((x, y, width, height))
         pyautogui.click(center)
         return True
+    except Exception as e:
+        return False
+    # if msg == None:
+    #     return False
+    # else:
+    #     x, y, width, height = msg
+    #     # print("X={},Y={}，宽{}像素,高{}像素".format(x, y, width, height))
+    #     center = pyautogui.center((x, y, width, height))
+    #     pyautogui.click(center)
+    #     return True
 
 
 def button(Img):
@@ -29,14 +39,17 @@ def button(Img):
 
 
 def find(Img):
-    msg = pyautogui.locateOnScreen(Img,
-                                   confidence=0.9,
-                                   grayscale=True,
-                                   region=(0, 0, constant.resolution_x, constant.resolution_y))
-    if msg == None:
+    try:
+        msg = pyautogui.locateOnScreen(Img,
+                                       confidence=0.9,
+                                       grayscale=True,
+                                       region=(0, 0, constant.resolution_x, constant.resolution_y))
+        if msg == None:
+            return False
+        else:
+            return True
+    except Exception as e:
         return False
-    else:
-        return True
 
 
 def click():
